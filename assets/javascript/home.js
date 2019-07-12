@@ -32,7 +32,7 @@ $("#artist-search").on("click", function(){
     $("#centerCard").append(expandCard);
 
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s4");
+    newCol = $("<form>").addClass("col s1");
     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
 
     newCol.append(btn);
@@ -78,7 +78,7 @@ $("#venue-search").on("click", function(){
 
     //button
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s4");
+    newCol = $("<form>").addClass("col s1");
     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "venueBtn").attr("href", "assets/html/venue.html");
 
 
@@ -173,7 +173,7 @@ $("#location-search").on("click", function(){
      expandCard.append(newRow);
 
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s4");
+    newCol = $("<form>").addClass("col s1");
     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
 
 
