@@ -17,15 +17,21 @@ $("#artist-search").on("click", function(){
 })
 
 $("#venue-search").on("click", function(){
-    var expand = $("<div>").addClass("card-action");
-    $("#centerCard").append(expand);
-    var expand = true;
-
+    if(!expanded){
+        var expand = $("<div>").addClass("card-action");
+        $("#centerCard").append(expand);
+        var expand = true;
+    
+    }
+    
 })
 
 $("#location-search").on("click", function(){
-    var expand = $("<div>").addClass("card-action");
-    $("#centerCard").append(expand);
-    var expand = true;
+    if(!expanded){
+        var expand = $("<div>").addClass("card-action");
+        $("#centerCard").append(expand);
+        var expand = true;
+    }
+    
 
 })
