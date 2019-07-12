@@ -33,7 +33,7 @@ $("#artist-search").on("click", function(){
 
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s4");
-    var btn = $("<button>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
 
     newCol.append(btn);
     newRow.append(newCol);
@@ -79,7 +79,7 @@ $("#venue-search").on("click", function(){
     //button
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s4");
-    var btn = $("<button>").addClass("waves-effect waves-light btn").text("Search").attr("id", "venueBtn");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "venueBtn").attr("href", "assets/html/venue.html");
 
 
     newCol.append(btn);
@@ -174,7 +174,7 @@ $("#location-search").on("click", function(){
 
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s4");
-    var btn = $("<button>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
 
 
     newCol.append(btn);
@@ -187,14 +187,14 @@ $("#location-search").on("click", function(){
 })
 
 $(document).on("click", "#artistBtn", function(event){
-    event.preventDefault();
+    //event.preventDefault();
     console.log("searched");
     artist = $("#artistName").val().trim();
     localStorage.setItem("artistName", artist);
 })
 
 $(document).on("click", "#locationBtn", function(event){
-    event.preventDefault();
+    //event.preventDefault();
     console.log("searched");
     local = $("#localName").val();
     localStorage.setItem("local", local);
@@ -209,7 +209,7 @@ $(document).on("click", "#locationBtn", function(event){
 })
 
 $(document).on("click", "#venueBtn", function(event){
-    event.preventDefault();
+    //event.preventDefault();
     venueName = $("#venueName").val();
     localStorage.setItem("venueName", venueName);
     venueState = $("#venueState").val();
