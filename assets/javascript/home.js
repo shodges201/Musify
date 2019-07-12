@@ -13,6 +13,17 @@ $("#artist-search").on("click", function(){
         var expand = $("<div>").addClass("card-action");
         $("#centerCard").append(expand);
         expanded = true;
+        var newRow = $("<div>").addClass("row");
+        var newCol = $("<form>").addClass("col s12");
+        var smallerRow = $("<div>").addClass("row");
+        var inputRow = $("<div>").addClass("input-field col s12");
+        var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Artist Name");
+
+        inputRow.append(inputField);
+        smallerRow.append(inputRow);
+        newCol.append(smallerRow);
+        newRow.append(newCol);
+        expand.append(newRow);
     }
 })
 
