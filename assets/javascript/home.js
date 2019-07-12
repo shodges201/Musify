@@ -5,12 +5,7 @@ var city = "";
 var zipCode = "";
 var radius = "";
 var artist= "";
-<<<<<<< HEAD
-var locationName = "";
-
-=======
 var local = "";
->>>>>>> d34931476e3afa7be3c1db0547186bd5da49f9f0
 var expanded = false;
 
 $("#artist-search").on("click", function(){
@@ -57,11 +52,7 @@ $("#venue-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-<<<<<<< HEAD
-    var inputField = $("<input>").attr("type", "text").attr("id", "venueName").addClass("validate").attr("placeholder", "Location Name");
-=======
-    var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Name");
->>>>>>> d34931476e3afa7be3c1db0547186bd5da49f9f0
+    var inputField = $("<input>").attr("type", "text").attr("id", "venueName").addClass("validate").attr("placeholder", "Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -105,11 +96,7 @@ $("#location-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-<<<<<<< HEAD
-    var inputField = $("<input>").attr("type", "text").attr("id", "locationName").addClass("validate").attr("placeholder", "Location");
-=======
     var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Location");
->>>>>>> d34931476e3afa7be3c1db0547186bd5da49f9f0
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -206,18 +193,6 @@ $(document).on("click", "#artistBtn", function(event){
 
 $(document).on("click", "#locationBtn", function(event){
     event.preventDefault();
-<<<<<<< HEAD
-    state = $("#state").val();
-})
-
-$(document).on("click", "#venueBtn", function(event){
-    event.preventDefault();
-    state = $("#venueState").val().trim();
-    localStorage.setItem("venueState", state);
-    locationName = $("#venueName").val().trim();
-    localStorage.setItem("venueName", locationName);
-})
-=======
     console.log("searched");
     local = $("#localName").val();
     localStorage.setItem("local", local);
@@ -231,4 +206,3 @@ $(document).on("click", "#venueBtn", function(event){
     localStorage.setItem("radius", radius);
 })
 
->>>>>>> d34931476e3afa7be3c1db0547186bd5da49f9f0
