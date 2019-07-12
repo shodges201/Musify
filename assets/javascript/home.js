@@ -5,7 +5,7 @@ var city = "";
 var zipCode = "";
 var radius = "";
 var artist= "";
-
+var local = "";
 var expanded = false;
 
 $("#artist-search").on("click", function(){
@@ -52,7 +52,7 @@ $("#venue-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Name");
+    var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -83,7 +83,7 @@ $("#location-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Location");
+    var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Location");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -164,3 +164,19 @@ $(document).on("click", "#artistBtn", function(event){
     artist = $("#name").val();
     localStorage.setItem("artistName", artist);
 })
+
+$(document).on("click", "#locationBtn", function(event){
+    event.preventDefault();
+    console.log("searched");
+    local = $("#localName").val();
+    localStorage.setItem("local", local);
+    state = $("#state").val();
+    localStorage.setItem("stateName", state);
+    city = $("#city").val();
+    localStorage.setItem("cityName", city);
+    zipCode = $("#zipCode").val();
+    localStorage.setItem("zipCode", zipCode);
+    radius = $("#radius").val();
+    localStorage.setItem("radius", radius);
+})
+
