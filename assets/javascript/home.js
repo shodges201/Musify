@@ -5,6 +5,7 @@ var city = "";
 var zipCode = "";
 var radius = "";
 var artist= "";
+var locationName = "";
 
 var expanded = false;
 
@@ -14,13 +15,13 @@ $("#artist-search").on("click", function(){
     if(expanded){
         $("#expandCard").remove();
     }
-    //First input field
+    //Name
     var expandCard = $("<div>").addClass("card-action").attr("id", "expandCard");
     var newRow = $("<div>").addClass("row");
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Artist Name");
+    var inputField = $("<input>").attr("type", "text").attr("id", "artistName").addClass("validate").attr("placeholder", "Artist Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -52,7 +53,7 @@ $("#venue-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Name");
+    var inputField = $("<input>").attr("type", "text").attr("id", "venueName").addClass("validate").attr("placeholder", "Location Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -60,6 +61,19 @@ $("#venue-search").on("click", function(){
     newRow.append(newCol);
     expandCard.append(newRow);
     $("#centerCard").append(expandCard);
+
+    //State
+    newRow = $("<div>").addClass("row");
+    newCol = $("<form>").addClass("col s12");
+    smallerRow = $("<div>").addClass("row");
+    inputRow = $("<div>").addClass("input-field col s12");
+    inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
+
+    inputRow.append(inputField);
+    smallerRow.append(inputRow);
+    newCol.append(smallerRow);
+    newRow.append(newCol);
+    expandCard.append(newRow);
 
     //button
     newRow = $("<div>").addClass("row");
@@ -83,7 +97,7 @@ $("#location-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Location");
+    var inputField = $("<input>").attr("type", "text").attr("id", "locationName").addClass("validate").attr("placeholder", "Location");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -144,6 +158,19 @@ $("#location-search").on("click", function(){
      newRow.append(newCol);
      expandCard.append(newRow);
 
+    //State
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s12");
+     smallerRow = $("<div>").addClass("row");
+     inputRow = $("<div>").addClass("input-field col s12");
+     inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
+ 
+     inputRow.append(inputField);
+     smallerRow.append(inputRow);
+     newCol.append(smallerRow);
+     newRow.append(newCol);
+     expandCard.append(newRow);
+
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s4");
     var btn = $("<button>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
@@ -161,6 +188,19 @@ $("#location-search").on("click", function(){
 $(document).on("click", "#artistBtn", function(event){
     event.preventDefault();
     console.log("searched");
-    artist = $("#name").val();
+    artist = $("#artistName").val().trim();
     localStorage.setItem("artistName", artist);
+})
+
+$(document).on("click", "#locationBtn", function(event){
+    event.preventDefault();
+    state = $("#state").val();
+})
+
+$(document).on("click", "#venueBtn", function(event){
+    event.preventDefault();
+    state = $("#venueState").val().trim();
+    localStorage.setItem("venueState", state);
+    locationName = $("#venueName").val().trim();
+    localStorage.setItem("venueName", locationName);
 })
