@@ -35,7 +35,7 @@ $("#venue-search").on("click", function(){
         var newCol = $("<form>").addClass("col s12");
         var smallerRow = $("<div>").addClass("row");
         var inputRow = $("<div>").addClass("input-field col s12");
-        var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Artist Name");
+        var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Location");
 
         inputRow.append(inputField);
         smallerRow.append(inputRow);
