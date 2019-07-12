@@ -6,6 +6,8 @@ var zipCode = "";
 var radius = "";
 var artist= "";
 var local = "";
+var venueName = "";
+var venueState = "";
 var expanded = false;
 
 $("#artist-search").on("click", function(){
@@ -46,7 +48,7 @@ $("#venue-search").on("click", function(){
     if(expanded){
         $("#expandCard").remove();
     }
-    //location name
+    //venue name
     var expandCard = $("<div>").addClass("card-action").attr("id", "expandCard");
     var newRow = $("<div>").addClass("row");
     var newCol = $("<form>").addClass("col s12");
@@ -204,5 +206,13 @@ $(document).on("click", "#locationBtn", function(event){
     localStorage.setItem("zipCode", zipCode);
     radius = $("#radius").val();
     localStorage.setItem("radius", radius);
+})
+
+$(document).on("click", "#venueBtn", function(event){
+    event.preventDefault();
+    venueName = $("#venueName").val();
+    localStorage.setItem("venueName", venueName);
+    venueState = $("#venueState").val();
+    localStorage.setItem("venueState", venueState);
 })
 
