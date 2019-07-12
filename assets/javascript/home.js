@@ -52,7 +52,7 @@ $("#venue-search").on("click", function(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
-    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Venue");
+    var inputField = $("<input>").attr("type", "text").attr("id", "name").addClass("validate").attr("placeholder", "Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -60,13 +60,6 @@ $("#venue-search").on("click", function(){
     newRow.append(newCol);
     expandCard.append(newRow);
     $("#centerCard").append(expandCard);
-
-    //Second input field
-    newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s12");
-    smallerRow = $("<div>").addClass("row");
-    inputRow = $("<div>").addClass("input-field col s12");
-    inputField = $("<input>").attr("type", "text").attr("id", "").addClass("validate").attr("placeholder", "Artist Name");
 
     //button
     newRow = $("<div>").addClass("row");
@@ -98,6 +91,58 @@ $("#location-search").on("click", function(){
     newRow.append(newCol);
     expandCard.append(newRow);
     $("#centerCard").append(expandCard);
+
+     //State
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s12");
+     smallerRow = $("<div>").addClass("row");
+     inputRow = $("<div>").addClass("input-field col s12");
+     inputField = $("<input>").attr("type", "text").attr("id", "state").addClass("validate").attr("placeholder", "State");
+ 
+     inputRow.append(inputField);
+     smallerRow.append(inputRow);
+     newCol.append(smallerRow);
+     newRow.append(newCol);
+     expandCard.append(newRow);
+ 
+     //City
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s12");
+     smallerRow = $("<div>").addClass("row");
+     inputRow = $("<div>").addClass("input-field col s12");
+     inputField = $("<input>").attr("type", "text").attr("id", "city").addClass("validate").attr("placeholder", "City");
+ 
+     inputRow.append(inputField);
+     smallerRow.append(inputRow);
+     newCol.append(smallerRow);
+     newRow.append(newCol);
+     expandCard.append(newRow);
+ 
+     //Zip Code
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s12");
+     smallerRow = $("<div>").addClass("row");
+     inputRow = $("<div>").addClass("input-field col s12");
+     inputField = $("<input>").attr("type", "text").attr("id", "zipCode").addClass("validate").attr("placeholder", "Zip Code");
+ 
+     inputRow.append(inputField);
+     smallerRow.append(inputRow);
+     newCol.append(smallerRow);
+     newRow.append(newCol);
+     expandCard.append(newRow);
+ 
+     //Radius
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s12");
+     smallerRow = $("<div>").addClass("row");
+     inputRow = $("<div>").addClass("input-field col s12");
+     inputField = $("<input>").attr("type", "text").attr("id", "radius").addClass("validate").attr("placeholder", "Radius");
+ 
+     inputRow.append(inputField);
+     smallerRow.append(inputRow);
+     newCol.append(smallerRow);
+     newRow.append(newCol);
+     expandCard.append(newRow);
 
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s4");
