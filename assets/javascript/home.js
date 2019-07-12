@@ -9,10 +9,9 @@ var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" 
 var expanded = false;
 
 $("#artist-search").on("click", function(){
+    console.log("clicked");
     if(!expanded){
-        var expand = $("<div>").addClass("card-action");
-        $("#centerCard").append(expand);
-        expanded = true;
+        var expandCard = $("<div>").addClass("card-action");
         var newRow = $("<div>").addClass("row");
         var newCol = $("<form>").addClass("col s12");
         var smallerRow = $("<div>").addClass("row");
@@ -23,7 +22,9 @@ $("#artist-search").on("click", function(){
         smallerRow.append(inputRow);
         newCol.append(smallerRow);
         newRow.append(newCol);
-        expand.append(newRow);
+        expandCard.append(newRow);
+        $("#centerCard").append(expandCard);
+        expanded = true;
     }
 })
 
