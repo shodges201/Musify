@@ -1,3 +1,4 @@
+var pos = "";
 $(document).ready(function(){
     $('.parallax').parallax();
     $('.sidenav').sidenav();
@@ -7,7 +8,7 @@ $(document).ready(function(){
       });
  //   $('.tap-target').tapTarget();
 
- localStorage.clear();
+localStorage.clear();
 var numResults = "20";
 var searchTerm = "";
 var state = "";
