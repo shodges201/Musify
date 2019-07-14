@@ -1,15 +1,10 @@
 $(document).ready(function(){
-
     $('.parallax').parallax();
     $('.sidenav').sidenav();
     $('.carousel.carousel-slider').carousel({
         fullWidth: true,
         indicators: true
       });
-
-
-
-
  //   $('.tap-target').tapTarget();
 
 var numResults = "20";
@@ -24,6 +19,16 @@ var venueName = "";
 var venueState = "";
 var expanded = false;
 var queryURL = "";
+var search = "";
+var youtube = "";
+
+$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+        event.preventDefault();
+        artistSearch();
+        console.log("enter and artist");
+    }
+})
 
 $("#artist-search").on("click", function(){
     console.log("clicked");
@@ -61,6 +66,7 @@ $("#artist-search").on("click", function(){
     
 
     expanded = true;
+    search = "artist";
 })
 
 $("#venue-search").on("click", function(){
@@ -107,7 +113,8 @@ $("#venue-search").on("click", function(){
     newRow.append(newCol);
     inputSection.append(newRow);
 
-    expanded = true;  
+    expanded = true;
+    search = "venue";  
 })
 
 $("#location-search").on("click", function(){
@@ -179,12 +186,72 @@ $("#location-search").on("click", function(){
     inputSection.append(newRow);
 
     expanded = true;
-    
-
+    search = "location";
 })
+
+
 
 $(document).on("click", "#artistBtn", function(event){
     event.preventDefault();
+    artistSearch();
+})
+
+$(document).on("click", "#locationBtn", function(event){
+    //event.preventDefault();
+    console.log("searched");
+    local = $("#localName").val();
+    localStorage.setItem("local", local);
+    state = $("#state").val();
+    localStorage.setItem("stateName", state);
+    city = $("#city").val();
+    localStorage.setItem("cityName", city);
+    zipCode = $("#zipCode").val();
+    localStorage.setItem("zipCode", zipCode);
+    radius = $("#radius").val();
+    localStorage.setItem("radius", radius);
+})
+
+$(document).on("click", "#venueBtn", function(event){
+    //event.preventDefault();
+    venueName = $("#venueName").val();
+    localStorage.setItem("venueName", venueName);
+    venueState = $("#venueState").val();
+    localStorage.setItem("venueState", venueState);
+})
+
+$(document).on("click", ".artistLink", function(event){
+    event.preventDefault();
+    var index = $(this).attr("data-index");
+    var artistID = json._embedded.attractions[index].id;
+    var artist = json._embedded.attractions[index].name;
+    var imageURL = json._embedded.attractions[index].images[0].url;
+    var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
+    var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
+    for(var i = 0; i < linksLength; i++){
+        var link = linksList[i];
+        if(link === "youtube"){
+            localStorage.setItem("youtube", json._embedded.attractions[index].externalLinks.youtube[0].url);
+        }
+        else if(link === "facebook"){
+            localStorage.setItem("facebook", json._embedded.attractions[index].externalLinks.facebook[0].url);
+        }
+        else if(link === "twitter"){
+            localStorage.setItem("twitter", json._embedded.attractions[index].externalLinks.twitter[0].url);
+        }
+        else if(link === "instagram"){
+            localStorage.setItem("instagram", json._embedded.attractions[index].externalLinks.instagram[0].url);
+        }
+        else if(link === "itunes"){
+            localStorage.setItem("itunes", json._embedded.attractions[index].externalLinks.itunes[0].url);
+        }
+    }
+    console.log(imageURL);
+    localStorage.setItem("artistName", artist);
+    localStorage.setItem("imageURL", imageURL);
+    localStorage.setItem("artistID", artistID);
+})
+
+function artistSearch(){
     artist = $("#artistName").val().trim();
     queryURL = "https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=" + artist + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
      //queries to find attraction/artist
@@ -221,38 +288,11 @@ $(document).on("click", "#artistBtn", function(event){
         else{
             var artistID = json._embedded.attractions[0].id;
             localStorage.setItem("artistID", artistID);
+            localStorage.setItem("artistName", artist);
+            localStorage.setItem("imageURL", response._embedded.attractions[0].images[0].url);
             window.location.href = "assets/html/artist.html"
         }
     });
-})
-
-$(document).on("click", "#locationBtn", function(event){
-    //event.preventDefault();
-    console.log("searched");
-    local = $("#localName").val();
-    localStorage.setItem("local", local);
-    state = $("#state").val();
-    localStorage.setItem("stateName", state);
-    city = $("#city").val();
-    localStorage.setItem("cityName", city);
-    zipCode = $("#zipCode").val();
-    localStorage.setItem("zipCode", zipCode);
-    radius = $("#radius").val();
-    localStorage.setItem("radius", radius);
-})
-
-$(document).on("click", "#venueBtn", function(event){
-    //event.preventDefault();
-    venueName = $("#venueName").val();
-    localStorage.setItem("venueName", venueName);
-    venueState = $("#venueState").val();
-    localStorage.setItem("venueState", venueState);
-})
-
-$(document).on("click", ".artistLink", function(){
-    var index = $(this).attr("data-index");
-    var artistID = json._embedded.attractions[index].id;
-    localStorage.setItem("artistID", artistID);
-})
+}
 
 });
