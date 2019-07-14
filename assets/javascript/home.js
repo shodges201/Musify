@@ -185,10 +185,7 @@ $("#location-search").on("click", function(){
 
 $(document).on("click", "#artistBtn", function(event){
     event.preventDefault();
-    console.log("searched");
     artist = $("#artistName").val().trim();
-    localStorage.setItem("artistName", artist);
-    var oneResult = false;
     queryURL = "https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=" + artist + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
      //queries to find attraction/artist
      $.ajax({
@@ -196,6 +193,9 @@ $(document).on("click", "#artistBtn", function(event){
         method: "GET"
     }).then(function(response) {
         json = response;
+
+        //when there is more than one result for a given search
+        //displays links for all the different results
         if(response._embedded.attractions.length > 1){
             var newRow = $("<div>").addClass("row");
             var newCol = $("<form>").addClass("col s12");
@@ -213,7 +213,14 @@ $(document).on("click", "#artistBtn", function(event){
                 smallerRow.append(linkContainer);
             }
         }
+        //no search results
+        else if(response._embedded.attractions.length === 0){
+            //do something
+        }
+        //search succesfull -> go to artist page
         else{
+            var artistID = json._embedded.attractions[0].id;
+            localStorage.setItem("artistID", artistID);
             window.location.href = "assets/html/artist.html"
         }
     });
