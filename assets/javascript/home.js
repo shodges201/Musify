@@ -7,6 +7,7 @@ $(document).ready(function(){
       });
  //   $('.tap-target').tapTarget();
 
+ localStorage.clear();
 var numResults = "20";
 var searchTerm = "";
 var state = "";
@@ -226,33 +227,7 @@ $(document).on("click", "#venueBtn", function(event){
 $(document).on("click", ".artistLink", function(event){
     //event.preventDefault();
     var index = $(this).attr("data-index");
-    var artistID = json._embedded.attractions[index].id;
-    var artist = json._embedded.attractions[index].name;
-    var imageURL = json._embedded.attractions[index].images[0].url;
-    var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
-    var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
-    for(var i = 0; i < linksLength; i++){
-        var link = linksList[i];
-        if(link === "youtube"){
-            localStorage.setItem("youtube", json._embedded.attractions[index].externalLinks.youtube[0].url);
-        }
-        else if(link === "facebook"){
-            localStorage.setItem("facebook", json._embedded.attractions[index].externalLinks.facebook[0].url);
-        }
-        else if(link === "twitter"){
-            localStorage.setItem("twitter", json._embedded.attractions[index].externalLinks.twitter[0].url);
-        }
-        else if(link === "instagram"){
-            localStorage.setItem("instagram", json._embedded.attractions[index].externalLinks.instagram[0].url);
-        }
-        else if(link === "itunes"){
-            localStorage.setItem("itunes", json._embedded.attractions[index].externalLinks.itunes[0].url);
-        }
-    }
-    console.log(imageURL);
-    localStorage.setItem("artistName", artist);
-    localStorage.setItem("imageURL", imageURL);
-    localStorage.setItem("artistID", artistID);
+    logData(index);
 })
 
 function artistSearch(){
@@ -290,13 +265,45 @@ function artistSearch(){
         }
         //search succesfull -> go to artist page
         else{
-            var artistID = json._embedded.attractions[0].id;
-            localStorage.setItem("artistID", artistID);
-            localStorage.setItem("artistName", artist);
-            localStorage.setItem("imageURL", response._embedded.attractions[0].images[0].url);
+            logData(0);
             window.location.href = "assets/html/artist.html"
         }
     });
+}
+
+function logData(index){
+    var artistID = json._embedded.attractions[index].id;
+    var artist = json._embedded.attractions[index].name;
+    var imageURL = json._embedded.attractions[index].images[0].url;
+    var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
+    var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
+    for(var i = 0; i < linksLength; i++){
+        var link = linksList[i];
+        if(link === "youtube"){
+            youtube = json._embedded.attractions[index].externalLinks.youtube[0].url;   
+        }
+        else if(link === "facebook"){
+            facebook = json._embedded.attractions[index].externalLinks.facebook[0].url;
+        }
+        else if(link === "twitter"){
+            twitter = json._embedded.attractions[index].externalLinks.twitter[0].url;
+        }
+        else if(link === "instagram"){
+            instagram = json._embedded.attractions[index].externalLinks.instagram[0].url;
+        }
+        else if(link === "itunes"){
+            itunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
+        }
+        localStorage.setItem("youtube", youtube);
+        localStorage.setItem("facebook", facebook);
+        localStorage.setItem("twitter", twitter);
+        localStorage.setItem("instagram", instagram);
+        localStorage.setItem("itunes", itunes);
+    }
+    console.log(imageURL);
+    localStorage.setItem("artistName", artist);
+    localStorage.setItem("imageURL", imageURL);
+    localStorage.setItem("artistID", artistID);
 }
 
 });

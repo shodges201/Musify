@@ -49,4 +49,5 @@ $(document).ready(function(){
         $("#shows-container").append(newContent);
     });
 
+
 })
