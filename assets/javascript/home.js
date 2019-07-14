@@ -21,6 +21,10 @@ var expanded = false;
 var queryURL = "";
 var search = "";
 var youtube = "";
+var twitter = "";
+var instagram = "";
+var facebook = "";
+var itunes = "";
 
 $(window).keydown(function(event){
     if(event.keyCode == 13) {
@@ -220,7 +224,7 @@ $(document).on("click", "#venueBtn", function(event){
 })
 
 $(document).on("click", ".artistLink", function(event){
-    event.preventDefault();
+    //event.preventDefault();
     var index = $(this).attr("data-index");
     var artistID = json._embedded.attractions[index].id;
     var artist = json._embedded.attractions[index].name;
