@@ -23,10 +23,10 @@ var local = "";
 var venueName = "";
 var venueState = "";
 var expanded = false;
+var queryURL = "";
 
 $("#artist-search").on("click", function(){
     console.log("clicked");
-    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp&date=upcoming";
     if(expanded){
         $("#inputSection").remove();
     }
@@ -34,7 +34,7 @@ $("#artist-search").on("click", function(){
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
 
-    var newRow = $("<div>").addClass("row");
+    var newRow = $("<div>").addClass("row").attr("id", "firstRow");
     var newCol = $("<form>").addClass("col s6");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s12");
@@ -48,11 +48,15 @@ $("#artist-search").on("click", function(){
     $("#inputSection").append(newRow);
 
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s1");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
+    newCol = $("<form>").addClass("col s12");
+    smallerRow = $("<div>").addClass("row").attr("id", "secondRow");
+    inputRow = $("<div>").addClass("input-field col s2");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn");
 
-    newCol.append(btn);
     newRow.append(newCol);
+    newCol.append(smallerRow);
+    smallerRow.append(inputRow);
+    inputRow.append(btn);
     inputSection.append(newRow);
     
 
@@ -163,12 +167,15 @@ $("#location-search").on("click", function(){
 
     
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s1");
+    newCol = $("<form>").addClass("col s12");
+    smallerRow = $("<div>").addClass("row");
+    inputRow = $("<div>").addClass("input-field col s3");
     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
 
-
-    newCol.append(btn);
     newRow.append(newCol);
+    newCol.append(smallerRow);
+    smallerRow.append(inputRow);
+    inputRow.append(btn);
     inputSection.append(newRow);
 
     expanded = true;
@@ -177,10 +184,46 @@ $("#location-search").on("click", function(){
 })
 
 $(document).on("click", "#artistBtn", function(event){
-    //event.preventDefault();
-    console.log("searched");
+    event.preventDefault();
     artist = $("#artistName").val().trim();
-    localStorage.setItem("artistName", artist);
+    queryURL = "https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=" + artist + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+     //queries to find attraction/artist
+     $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        json = response;
+
+        //when there is more than one result for a given search
+        //displays links for all the different results
+        if(response._embedded.attractions.length > 1){
+            var newRow = $("<div>").addClass("row");
+            var newCol = $("<form>").addClass("col s12");
+            var smallerRow = $("<div>").addClass("row");
+
+            newRow.append(newCol);
+            newCol.append(smallerRow);
+            $("#inputSection").append(newRow);
+
+            for(var i = 0; i < response._embedded.attractions.length; i++){
+                console.log("blaj");
+                var linkContainer = $("<div>").addClass("col s4");
+                var newLink = $("<a>").addClass("artistLink").attr("href", "assets/html/artist.html").text(response._embedded.attractions[i].name).attr("data-index", i);
+                linkContainer.append(newLink);
+                smallerRow.append(linkContainer);
+            }
+        }
+        //no search results
+        else if(response._embedded.attractions.length === 0){
+            //do something
+        }
+        //search succesfull -> go to artist page
+        else{
+            var artistID = json._embedded.attractions[0].id;
+            localStorage.setItem("artistID", artistID);
+            window.location.href = "assets/html/artist.html"
+        }
+    });
 })
 
 $(document).on("click", "#locationBtn", function(event){
@@ -205,4 +248,11 @@ $(document).on("click", "#venueBtn", function(event){
     venueState = $("#venueState").val();
     localStorage.setItem("venueState", venueState);
 })
+
+$(document).on("click", ".artistLink", function(){
+    var index = $(this).attr("data-index");
+    var artistID = json._embedded.attractions[index].id;
+    localStorage.setItem("artistID", artistID);
+})
+
 });
