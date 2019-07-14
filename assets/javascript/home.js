@@ -30,19 +30,20 @@ var itunes = "";
 $(window).keydown(function(event){
     if(event.keyCode == 13) {
         event.preventDefault();
-        artistSearch();
-        console.log("enter and artist");
+        if(search === "artist"){
+            if($("#artistName").val() !== "")
+            artistSearch();
+            console.log("enter and artist");
+        }
     }
 })
 
-$("#artist-search").on("click", function(){
-    console.log("clicked");
-    if(expanded){
-        $("#inputSection").remove();
-    }
+////// ARTIST SEARCH SECTION
+function artistDisplay(){
     //Name
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
+    $("#buttonsSections").css("margin-bottom", "20px");
 
     var newRow = $("<div>").addClass("row").attr("id", "firstRow");
     var newCol = $("<form>").addClass("col s6");
@@ -58,27 +59,39 @@ $("#artist-search").on("click", function(){
     $("#inputSection").append(newRow);
 
     newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s12");
-    smallerRow = $("<div>").addClass("row").attr("id", "secondRow");
-    inputRow = $("<div>").addClass("input-field col s2");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn");
+    newCol = $("<form>").addClass("col s1");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
 
+
+    newCol.append(btn);
     newRow.append(newCol);
-    newCol.append(smallerRow);
-    smallerRow.append(inputRow);
-    inputRow.append(btn);
     inputSection.append(newRow);
-    
+}
 
-    expanded = true;
-    search = "artist";
-})
-
-$("#venue-search").on("click", function(){
-    var eventQueryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + searchTerm +"&size=" + numResults + "&postalcode=" + zipCode + "&stateCode=" + state + "&city=" + city+ "&radius=" + radius + "&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-    if(expanded){
+$("#artist-search").on("click", function(){
+    console.log("clicked");
+    if(expanded && search === "artist"){
         $("#inputSection").remove();
+        $("#buttonsSections").css("margin-bottom", "0px");
+        expanded = false;
     }
+    else if(expanded && search !== "artist"){
+        $("#inputSection").remove();
+        artistDisplay();
+        expanded = true;
+        search = "artist";
+    }
+    else{
+        artistDisplay();
+        expanded = true;
+        search = "artist";
+    }
+})
+///////// END ARTIST SEARCH SECTION //////////
+
+///////// VENUE SEARCH SECTION /////////////////
+function venueDisplay(){
+    $("#buttonsSections").css("margin-bottom", "20px");
     //venue name
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
@@ -117,15 +130,32 @@ $("#venue-search").on("click", function(){
     newCol.append(btn);
     newRow.append(newCol);
     inputSection.append(newRow);
+}
 
-    expanded = true;
-    search = "venue";  
-})
-
-$("#location-search").on("click", function(){
-    if(expanded){
+$("#venue-search").on("click", function(){
+    var eventQueryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + searchTerm +"&size=" + numResults + "&postalcode=" + zipCode + "&stateCode=" + state + "&city=" + city+ "&radius=" + radius + "&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+    if(expanded && search === "venue"){
         $("#inputSection").remove();
+        $("#buttonsSections").css("margin-bottom", "0px");
+        expanded = false;
     }
+    else if(expanded && search !== "venue"){
+        $("#inputSection").remove();
+        venueDisplay();
+        expanded = true;
+        search = "venue";
+    }
+    else{
+        venueDisplay();
+        expanded = true;
+        search = "venue";
+    }  
+})
+///////// END VENUE SEARCH SECTION //////////
+
+///////// LOCATION SEARCH SECTION /////////////
+function locationDisplay(){
+    $("#buttonsSections").css("margin-bottom", "20px");
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
 
@@ -178,27 +208,41 @@ $("#location-search").on("click", function(){
      smallerRow.append(inputRow);
 
     
-    newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s12");
-    smallerRow = $("<div>").addClass("row");
-    inputRow = $("<div>").addClass("input-field col s3");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn");
+     newRow = $("<div>").addClass("row");
+     newCol = $("<form>").addClass("col s1");
+     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn").attr("href", "assets/html/location.html");
+ 
+     newCol.append(btn);
+     newRow.append(newCol);
+     inputSection.append(newRow);
+}
 
-    newRow.append(newCol);
-    newCol.append(smallerRow);
-    smallerRow.append(inputRow);
-    inputRow.append(btn);
-    inputSection.append(newRow);
-
-    expanded = true;
-    search = "location";
+$("#location-search").on("click", function(){
+    if(expanded && search === "location"){
+        $("#inputSection").remove();
+        $("#buttonsSections").css("margin-bottom", "0px");
+        expanded = false;
+    }
+    else if(expanded && search !== "location"){
+        $("#inputSection").remove();
+        locationDisplay();
+        expanded = true;
+        search = "location";
+    }
+    else{
+        locationDisplay();
+        expanded = true;
+        search = "location";
+    }
 })
 
-
+///////// END LOCATION SEARCH SECTION ///////////////
 
 $(document).on("click", "#artistBtn", function(event){
     event.preventDefault();
-    artistSearch();
+    if($("#artistName").val() !== ""){
+        artistSearch();
+    }
 })
 
 $(document).on("click", "#locationBtn", function(event){
@@ -227,7 +271,7 @@ $(document).on("click", "#venueBtn", function(event){
 $(document).on("click", ".artistLink", function(event){
     //event.preventDefault();
     var index = $(this).attr("data-index");
-    logData(index);
+    logArtistData(index);
 })
 
 function artistSearch(){
@@ -265,18 +309,19 @@ function artistSearch(){
         }
         //search succesfull -> go to artist page
         else{
-            logData(0);
+            logArtistData(0);
             window.location.href = "assets/html/artist.html"
         }
     });
 }
 
-function logData(index){
+function logArtistData(index){
     var artistID = json._embedded.attractions[index].id;
     var artist = json._embedded.attractions[index].name;
     var imageURL = json._embedded.attractions[index].images[0].url;
     var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
     var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
+    var upcomingEvents = json._embedded.attractions[index].upcomingEvents._total;
     for(var i = 0; i < linksLength; i++){
         var link = linksList[i];
         if(link === "youtube"){
@@ -304,6 +349,7 @@ function logData(index){
     localStorage.setItem("artistName", artist);
     localStorage.setItem("imageURL", imageURL);
     localStorage.setItem("artistID", artistID);
+    localStorage.setItem("upcomingEvents", upcomingEvents);
 }
 
 });
