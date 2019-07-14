@@ -40,7 +40,7 @@ $(document).ready(function(){
     }
     //only query API if artist has upcoming events
     if(numEvents > 0){
-        queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?attractionId=" + artistID + "&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+        queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?attractionId=" + artistID + "&sort=date,asc&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
         //queries to get artist events
         $.ajax({
             url: queryURL,
