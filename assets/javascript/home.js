@@ -13,7 +13,6 @@ var numResults = "20";
 var searchTerm = "";
 var state = "";
 var city = "";
-var zipCode = "";
 var radius = "";
 var artist= "";
 var local = "";
@@ -43,6 +42,12 @@ $(window).keydown(function(event){
                 $("#link-container").remove();
             }
             venueSearch();
+        }
+        else if(search === "location"){
+            if(displayingResults === true){
+                $("#link-container").remove();
+            }
+            logLocationData();
         }
     }
 })
@@ -334,50 +339,22 @@ function locationDisplay(){
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
 
-    //location name
-    var newRow = $("<div>").addClass("row");
-    var newCol = $("<form>").addClass("col s12");
-    var smallerRow = $("<div>").addClass("row");
-    var inputRow = $("<div>").addClass("input-field col s6");
-    var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Location");
-
-    inputRow.append(inputField);
-    smallerRow.append(inputRow);
-    newCol.append(smallerRow);
-    newRow.append(newCol);
-    inputSection.append(newRow);
-
-
-     //State
-     inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "state").addClass("validate").attr("placeholder", "State");
- 
-     inputRow.append(inputField);
-     smallerRow.append(inputRow);
-
-     //Zip Code
-     inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "zipCode").addClass("validate").attr("placeholder", "Zip Code");
- 
-     inputRow.append(inputField);
-     smallerRow.append(inputRow);
- 
      //City
      newRow = $("<div>").addClass("row");
      newCol = $("<form>").addClass("col s12");
      smallerRow = $("<div>").addClass("row");
      inputRow = $("<div>").addClass("input-field col s6");
-     inputField = $("<input>").attr("type", "text").attr("id", "city").addClass("validate").attr("placeholder", "City");
+     inputField = $("<input>").attr("type", "text").attr("id", "locationCity").addClass("validate").attr("placeholder", "City");
  
      inputRow.append(inputField);
      smallerRow.append(inputRow);
      newCol.append(smallerRow);
      newRow.append(newCol);
      inputSection.append(newRow);
- 
-     //Radius
+
+     //State
      inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "radius").addClass("validate").attr("placeholder", "Radius");
+     inputField = $("<input>").attr("type", "text").attr("id", "locationState").addClass("validate").attr("placeholder", "State");
  
      inputRow.append(inputField);
      smallerRow.append(inputRow);
@@ -416,17 +393,15 @@ $("#location-search").on("click", function(){
 
 $(document).on("click", "#locationBtn", function(event){
     //event.preventDefault();
-    console.log("searched");
-    local = $("#localName").val();
-    localStorage.setItem("local", local);
-    state = $("#state").val();
-    localStorage.setItem("stateName", state);
-    city = $("#city").val();
-    localStorage.setItem("cityName", city);
-    zipCode = $("#zipCode").val();
-    localStorage.setItem("zipCode", zipCode);
-    radius = $("#radius").val();
-    localStorage.setItem("radius", radius);
+    //console.log("searched");
+    logLocationData();
 })
+
+function logLocationData(){
+    state = $("#locationState").val().trim();
+    localStorage.setItem("locationState", state);
+    city = $("#locationCity").val().trim();
+    localStorage.setItem("locationCity", city);
+}   
 
 });
