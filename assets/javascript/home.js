@@ -27,14 +27,22 @@ var twitter = "";
 var instagram = "";
 var facebook = "";
 var itunes = "";
+var displayingResults = false;
 
 $(window).keydown(function(event){
     if(event.keyCode == 13) {
         event.preventDefault();
         if(search === "artist"){
-            if($("#artistName").val() !== "")
+            if(displayingResults === true){
+                $("#link-container").remove();
+            }
             artistSearch();
-            console.log("enter and artist");
+        }
+        else if(search === "venue"){
+            if(displayingResults === true){
+                $("#link-container").remove();
+            }
+            venueSearch();
         }
     }
 })
@@ -75,6 +83,7 @@ $("#artist-search").on("click", function(){
         $("#inputSection").remove();
         $("#buttonsSections").css("margin-bottom", "0px");
         expanded = false;
+        displayingResults = false;
     }
     else if(expanded && search !== "artist"){
         $("#inputSection").remove();
@@ -86,6 +95,100 @@ $("#artist-search").on("click", function(){
         artistDisplay();
         expanded = true;
         search = "artist";
+    }
+})
+$(document).on("click", ".artistLink", function(event){
+    //event.preventDefault();
+    var index = $(this).attr("data-index");
+    logArtistData(index);
+})
+
+function artistSearch(){
+    artist = $("#artistName").val().trim();
+    queryURL = "https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=" + artist + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+     //queries to find attraction/artist
+     $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        json = response;
+
+        //when there is more than one result for a given search
+        //displays links for all the different results
+        if(response._embedded.attractions.length > 1){
+            var newRow = $("<div>").addClass("row").attr("id", "link-container");
+            var newCol = $("<form>").addClass("col s12");
+            var smallerRow = $("<div>").addClass("row");
+
+            newRow.append(newCol);
+            newCol.append(smallerRow);
+            $("#inputSection").append(newRow);
+
+            for(var i = 0; i < response._embedded.attractions.length; i++){
+                console.log("blaj");
+                var linkContainer = $("<div>").addClass("col s4");
+                var newLink = $("<a>").addClass("artistLink").attr("href", "assets/html/artist.html").text(response._embedded.attractions[i].name).attr("data-index", i);
+                linkContainer.append(newLink);
+                smallerRow.append(linkContainer);
+            }
+            displayingResults = true;
+        }
+        //no search results
+        else if(response._embedded.attractions.length === 0){
+            //do something
+        }
+        //search succesfull -> go to artist page
+        else{
+            logArtistData(0);
+            window.location.href = "assets/html/artist.html"
+        }
+    });
+}
+
+function logArtistData(index){
+    var artistID = json._embedded.attractions[index].id;
+    var artist = json._embedded.attractions[index].name;
+    var imageURL = json._embedded.attractions[index].images[0].url;
+    var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
+    var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
+    var upcomingEvents = json._embedded.attractions[index].upcomingEvents._total;
+    for(var i = 0; i < linksLength; i++){
+        var link = linksList[i];
+        if(link === "youtube"){
+            youtube = json._embedded.attractions[index].externalLinks.youtube[0].url;   
+        }
+        else if(link === "facebook"){
+            facebook = json._embedded.attractions[index].externalLinks.facebook[0].url;
+        }
+        else if(link === "twitter"){
+            twitter = json._embedded.attractions[index].externalLinks.twitter[0].url;
+        }
+        else if(link === "instagram"){
+            instagram = json._embedded.attractions[index].externalLinks.instagram[0].url;
+        }
+        else if(link === "itunes"){
+            itunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
+        }
+    }
+    localStorage.setItem("youtube", youtube);
+    localStorage.setItem("facebook", facebook);
+    localStorage.setItem("twitter", twitter);
+    localStorage.setItem("instagram", instagram);
+    localStorage.setItem("itunes", itunes);
+    console.log(imageURL);
+    localStorage.setItem("artistName", artist);
+    localStorage.setItem("imageURL", imageURL);
+    localStorage.setItem("artistID", artistID);
+    localStorage.setItem("upcomingEvents", upcomingEvents);
+}
+
+$(document).on("click", "#artistBtn", function(event){
+    event.preventDefault();
+    if($("#artistName").val() !== ""){
+        if(displayingResults === true){
+            $("#link-container").remove();
+        }
+        artistSearch();
     }
 })
 ///////// END ARTIST SEARCH SECTION //////////
@@ -139,6 +242,7 @@ $("#venue-search").on("click", function(){
         $("#inputSection").remove();
         $("#buttonsSections").css("margin-bottom", "0px");
         expanded = false;
+        displayingResults = false;
     }
     else if(expanded && search !== "venue"){
         $("#inputSection").remove();
@@ -166,7 +270,7 @@ function venueSearch(){
         //when there is more than one result for a given search
         //displays links for all the different results
         if(response._embedded.venues.length > 1){
-            var newRow = $("<div>").addClass("row");
+            var newRow = $("<div>").addClass("row").attr("id", "link-container");
             var newCol = $("<form>").addClass("col s12");
             var smallerRow = $("<div>").addClass("row");
 
@@ -176,10 +280,11 @@ function venueSearch(){
 
             for(var i = 0; i < response._embedded.venues.length; i++){
                 var linkContainer = $("<div>").addClass("col s4");
-                var newLink = $("<a>").addClass("venueLink").attr("href", "assets/html/venue.html").text(response._embedded.venues[i].name).attr("data-index", i);
+                var newLink = $("<a>").addClass("venueLink").text(response._embedded.venues[i].name).attr("data-index", i).attr("href", "assets/html/Venue.html");
                 linkContainer.append(newLink);
                 smallerRow.append(linkContainer);
             }
+            displayingResults = true;
         }
         //no search results
         else if(response._embedded.events.length === 0){
@@ -200,18 +305,26 @@ $(document).on("click", ".venueLink", function(event){
 })
 
 function logVenueData(index){
-    console.log("venueData");
-    var twitter = json._embedded.venues[index].social.twitter.handle;
+    if(json._embedded.venues[index].social !== undefined){
+        twitter = json._embedded.venues[index].social.twitter.handle;
+    }
     localStorage.setItem("twitter", twitter);
     var venueName = json._embedded.venues[index].name;
     var venueId = json._embedded.venues[index].id;
+    var venueImage = json._embedded.venues[index].images[0].url;
     localStorage.setItem("venueName", venueName);
     localStorage.setItem("venueId", venueId);
+    localStorage.setItem("venueImage", venueImage);
 }
 
 $(document).on("click", "#venueBtn", function(event){
     event.preventDefault();
-    venueSearch();
+    if($("#venueName").val().trim() !== "" || $("#venueState").val().trim() !== ""){
+        if(displayingResults === true){
+            $("#link-container").remove();
+        }
+        venueSearch();
+    }
 })
 ///////// END VENUE SEARCH SECTION //////////
 
@@ -284,6 +397,7 @@ $("#location-search").on("click", function(){
         $("#inputSection").remove();
         $("#buttonsSections").css("margin-bottom", "0px");
         expanded = false;
+        displayingResults = false;
     }
     else if(expanded && search !== "location"){
         $("#inputSection").remove();
@@ -300,13 +414,6 @@ $("#location-search").on("click", function(){
 
 ///////// END LOCATION SEARCH SECTION ///////////////
 
-$(document).on("click", "#artistBtn", function(event){
-    event.preventDefault();
-    if($("#artistName").val() !== ""){
-        artistSearch();
-    }
-})
-
 $(document).on("click", "#locationBtn", function(event){
     //event.preventDefault();
     console.log("searched");
@@ -321,89 +428,5 @@ $(document).on("click", "#locationBtn", function(event){
     radius = $("#radius").val();
     localStorage.setItem("radius", radius);
 })
-
-$(document).on("click", ".artistLink", function(event){
-    //event.preventDefault();
-    var index = $(this).attr("data-index");
-    logArtistData(index);
-})
-
-function artistSearch(){
-    artist = $("#artistName").val().trim();
-    queryURL = "https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=" + artist + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-     //queries to find attraction/artist
-     $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-        json = response;
-
-        //when there is more than one result for a given search
-        //displays links for all the different results
-        if(response._embedded.attractions.length > 1){
-            var newRow = $("<div>").addClass("row");
-            var newCol = $("<form>").addClass("col s12");
-            var smallerRow = $("<div>").addClass("row");
-
-            newRow.append(newCol);
-            newCol.append(smallerRow);
-            $("#inputSection").append(newRow);
-
-            for(var i = 0; i < response._embedded.attractions.length; i++){
-                console.log("blaj");
-                var linkContainer = $("<div>").addClass("col s4");
-                var newLink = $("<a>").addClass("artistLink").attr("href", "assets/html/artist.html").text(response._embedded.attractions[i].name).attr("data-index", i);
-                linkContainer.append(newLink);
-                smallerRow.append(linkContainer);
-            }
-        }
-        //no search results
-        else if(response._embedded.attractions.length === 0){
-            //do something
-        }
-        //search succesfull -> go to artist page
-        else{
-            logArtistData(0);
-            window.location.href = "assets/html/artist.html"
-        }
-    });
-}
-
-function logArtistData(index){
-    var artistID = json._embedded.attractions[index].id;
-    var artist = json._embedded.attractions[index].name;
-    var imageURL = json._embedded.attractions[index].images[0].url;
-    var linksLength = Object.keys(json._embedded.attractions[index].externalLinks).length;
-    var linksList = Object.keys(json._embedded.attractions[index].externalLinks);
-    var upcomingEvents = json._embedded.attractions[index].upcomingEvents._total;
-    for(var i = 0; i < linksLength; i++){
-        var link = linksList[i];
-        if(link === "youtube"){
-            youtube = json._embedded.attractions[index].externalLinks.youtube[0].url;   
-        }
-        else if(link === "facebook"){
-            facebook = json._embedded.attractions[index].externalLinks.facebook[0].url;
-        }
-        else if(link === "twitter"){
-            twitter = json._embedded.attractions[index].externalLinks.twitter[0].url;
-        }
-        else if(link === "instagram"){
-            instagram = json._embedded.attractions[index].externalLinks.instagram[0].url;
-        }
-        else if(link === "itunes"){
-            itunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
-        }
-    }
-    localStorage.setItem("youtube", youtube);
-    localStorage.setItem("facebook", facebook);
-    localStorage.setItem("twitter", twitter);
-    localStorage.setItem("instagram", instagram);
-    localStorage.setItem("itunes", itunes);
-    console.log(imageURL);
-    localStorage.setItem("artistName", artist);
-    localStorage.setItem("imageURL", imageURL);
-    localStorage.setItem("artistID", artistID);
-    localStorage.setItem("upcomingEvents", upcomingEvents);
-}
 
 });

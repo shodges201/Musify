@@ -1,9 +1,12 @@
 $(document).ready(function(){
     var venueId = localStorage.getItem("venueId");
     var venueName = localStorage.getItem("venueName");
+    var venueImage = localStorage.getItem("venueImage");
+    $("#venue-image").attr("src", venueImage);
     var venueURL = "https://app.ticketmaster.com/discovery/v2/events.json?venueId=" + venueId + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
     $("#venueName").text(venueName);
-    var linkURL = localStorage.getItem("twitter");
+    if(localStorage.getItem("twitter") !== ""){
+        var linkURL = localStorage.getItem("twitter");
         linkURL = linkURL.replace("@","")
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
@@ -13,7 +16,8 @@ $(document).ready(function(){
             {
               size: 'large'
             }
-          );
+        );
+    }
     $.ajax({
         url: venueURL,
         method: "GET"
