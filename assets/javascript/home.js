@@ -52,7 +52,6 @@ var numResults = "20";
 var searchTerm = "";
 var state = "";
 var city = "";
-var zipCode = "";
 var radius = "";
 var artist= "";
 var local = "";

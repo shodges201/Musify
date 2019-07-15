@@ -2,6 +2,7 @@ var locationState = localStorage.getItem("locationState");
 var locationCity = localStorage.getItem("locationCity");
 var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&stateCode=" + locationState +"&city=" + locationCity + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
 
+
 $(document).ready(function(){
     $.ajax({
         url: locationURL,
