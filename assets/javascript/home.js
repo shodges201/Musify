@@ -287,7 +287,7 @@ function venueSearch(){
             displayingResults = true;
         }
         //no search results
-        else if(response._embedded.events.length === 0){
+        else if(response._embedded.venues.length === 0){
             //do something
         }
         //search succesfull -> go to venue page
