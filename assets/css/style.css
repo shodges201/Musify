@@ -1,13 +1,12 @@
-/* Hello */
-
-
 #navBar{
     height: 70px;
 }
-.parallax{
-    position:static;
 
-  }
+.parallax {
+    position: static;
+
+}
+
 nav ul a,
 nav .brand-logo {
     color: white;
@@ -28,6 +27,7 @@ p {
     color: rgba(255, 255, 255, .9);
     width: 100%;
 }
+
 .parallax-container .section {
     width: 100%;
 }
@@ -44,13 +44,20 @@ footer.page-footer {
     margin: 0;
 }
 
-#buttonsSections{
+#buttonsSections {
     margin-bottom: 0px;
 }
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
+
+.dropdown-content {
+    max-height: 350px !important;
+    overflow-y: auto !important;
+    backface-visibility: hidden !important;
+    /* top: -350px; */
+ }
 
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
