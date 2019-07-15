@@ -22,14 +22,29 @@ $(document).ready(function(){
     }
     if(localStorage.getItem("twitter") !== ""){
         var linkURL = localStorage.getItem("twitter");
-        var link = $("<a>").attr("href", linkURL).text("Twitter").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
-        var listItem = $("<li>").append(link);
-        $("#social-media-links").append(listItem);
+        linkURL = linkURL.replace("https://twitter.com/","")
+        var twitterItem = $("<li>").attr("id", "twitter-button");
+        $("#social-media-links").append(twitterItem);
+        twttr.widgets.createFollowButton(
+            linkURL,
+            document.getElementById('twitter-button'),
+            {
+              size: 'large'
+            }
+          );
     }
     if(localStorage.getItem("youtube") !== ""){
         var linkURL = localStorage.getItem("youtube");
+        var listItem = $("<li>");
+        // linkURL = linkURL.replace("https://www.youtube.com/user/", "");
+        // var options = {
+        //   'channel': linkURL,
+        //   'layout': 'default'
+        // };
+        // gapi.ytsubscribe.render(listItem, options);
+        //var link = $("<div>").addClass("g-ytsubscribe").attr("data-channel", linkURL).attr("data-layout", "default").attr("data-count", "default");
         var link = $("<a>").attr("href", linkURL).text("Youtube").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
-        var listItem = $("<li>").append(link);
+        listItem.append(link);
         $("#social-media-links").append(listItem);
     }
     if(localStorage.getItem("facebook") !== ""){
@@ -50,7 +65,8 @@ $(document).ready(function(){
             $("#shows-container").empty();
             //var newContent = $("<div>").text(JSON.stringify(response));
             //$("#shows-container").append(newContent);
-            for(var i = 0; i < numEvents; i++){
+            for(var i = 0; i < response._embedded.events.length; i++){
+                console.log(response._embedded.events[i]);
                 var startDate = response._embedded.events[i].dates.start.localDate;
                 var startTime = response._embedded.events[i].dates.start.localTime;
                 var eventName = response._embedded.events[i].name;

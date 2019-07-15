@@ -93,6 +93,7 @@ $("#artist-search").on("click", function(){
 ///////// VENUE SEARCH SECTION /////////////////
 function venueDisplay(){
     $("#buttonsSections").css("margin-bottom", "20px");
+    
     //venue name
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
@@ -134,7 +135,6 @@ function venueDisplay(){
 }
 
 $("#venue-search").on("click", function(){
-    var eventQueryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + searchTerm +"&size=" + numResults + "&postalcode=" + zipCode + "&stateCode=" + state + "&city=" + city+ "&radius=" + radius + "&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
     if(expanded && search === "venue"){
         $("#inputSection").remove();
         $("#buttonsSections").css("margin-bottom", "0px");
@@ -151,6 +151,67 @@ $("#venue-search").on("click", function(){
         expanded = true;
         search = "venue";
     }  
+})
+function venueSearch(){
+    var venue = $("#venueName").val().trim();
+    var state = $("#venueState").val().trim();
+    queryURL = "https://app.ticketmaster.com/discovery/v2/venues.json?stateCode=" + state + "&keyword="+ venue +"&sort=relevance,desc&apikey=UpMLmiplG7uNV9Gbe2W1u5v6GFAFAAXd";
+    //queries to find attraction/artist
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        json = response;
+
+        //when there is more than one result for a given search
+        //displays links for all the different results
+        if(response._embedded.venues.length > 1){
+            var newRow = $("<div>").addClass("row");
+            var newCol = $("<form>").addClass("col s12");
+            var smallerRow = $("<div>").addClass("row");
+
+            newRow.append(newCol);
+            newCol.append(smallerRow);
+            $("#inputSection").append(newRow);
+
+            for(var i = 0; i < response._embedded.venues.length; i++){
+                var linkContainer = $("<div>").addClass("col s4");
+                var newLink = $("<a>").addClass("venueLink").attr("href", "assets/html/venue.html").text(response._embedded.venues[i].name).attr("data-index", i);
+                linkContainer.append(newLink);
+                smallerRow.append(linkContainer);
+            }
+        }
+        //no search results
+        else if(response._embedded.events.length === 0){
+            //do something
+        }
+        //search succesfull -> go to venue page
+        else{
+            logVenueData(0);
+            window.location.href = "assets/html/venue.html"
+        }
+    });
+}
+
+$(document).on("click", ".venueLink", function(event){
+    //event.preventDefault();
+    var index = $(this).attr("data-index");
+    logVenueData(index);
+})
+
+function logVenueData(index){
+    console.log("venueData");
+    var twitter = json._embedded.venues[index].social.twitter.handle;
+    localStorage.setItem("twitter", twitter);
+    var venueName = json._embedded.venues[index].name;
+    var venueId = json._embedded.venues[index].id;
+    localStorage.setItem("venueName", venueName);
+    localStorage.setItem("venueId", venueId);
+}
+
+$(document).on("click", "#venueBtn", function(event){
+    event.preventDefault();
+    venueSearch();
 })
 ///////// END VENUE SEARCH SECTION //////////
 
@@ -261,14 +322,6 @@ $(document).on("click", "#locationBtn", function(event){
     localStorage.setItem("radius", radius);
 })
 
-$(document).on("click", "#venueBtn", function(event){
-    //event.preventDefault();
-    venueName = $("#venueName").val();
-    localStorage.setItem("venueName", venueName);
-    venueState = $("#venueState").val();
-    localStorage.setItem("venueState", venueState);
-})
-
 $(document).on("click", ".artistLink", function(event){
     //event.preventDefault();
     var index = $(this).attr("data-index");
@@ -340,12 +393,12 @@ function logArtistData(index){
         else if(link === "itunes"){
             itunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
         }
-        localStorage.setItem("youtube", youtube);
-        localStorage.setItem("facebook", facebook);
-        localStorage.setItem("twitter", twitter);
-        localStorage.setItem("instagram", instagram);
-        localStorage.setItem("itunes", itunes);
     }
+    localStorage.setItem("youtube", youtube);
+    localStorage.setItem("facebook", facebook);
+    localStorage.setItem("twitter", twitter);
+    localStorage.setItem("instagram", instagram);
+    localStorage.setItem("itunes", itunes);
     console.log(imageURL);
     localStorage.setItem("artistName", artist);
     localStorage.setItem("imageURL", imageURL);
