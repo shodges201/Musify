@@ -2,11 +2,13 @@ $(document).ready(function(){
     var venueId = localStorage.getItem("venueId");
     var venueName = localStorage.getItem("venueName");
     var venueImage = localStorage.getItem("venueImage");
+    var startDate = "";
+    var startTime = "";
     $("#venue-image").attr("src", venueImage);
     var venueURL = "https://app.ticketmaster.com/discovery/v2/events.json?venueId=" + venueId + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
     $("#venue-name").text(venueName);
     if(localStorage.getItem("venueTwitter") !== ""){
-        var linkURL = localStorage.getItem("twitter");
+        var linkURL = localStorage.getItem("venueTwitter");
         linkURL = linkURL.replace("@","")
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
@@ -25,8 +27,8 @@ $(document).ready(function(){
         json = response;
         $("#shows-container").empty();
         for(var i = 0; i < response._embedded.events.length; i++){
-            var startDate = response._embedded.events[i].dates.start.localDate;
-            var startTime = response._embedded.events[i].dates.start.localTime;
+            startDate = response._embedded.events[i].dates.start.localDate;
+            startTime = response._embedded.events[i].dates.start.localTime;
             var eventName = response._embedded.events[i].name;
             var venueName = response._embedded.events[i]._embedded.venues[0].name;
             var city = response._embedded.events[i]._embedded.venues[0].city.name;

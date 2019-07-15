@@ -73,27 +73,16 @@ $(document).ready(function(){
                 var venueName = response._embedded.events[i]._embedded.venues[0].name;
                 var city = response._embedded.events[i]._embedded.venues[0].city.name;
                 var country = response._embedded.events[i]._embedded.venues[0].country.name;
+                var goToURL = response._embedded.events[i].url;
                 if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
                     var state = response._embedded.events[i]._embedded.venues[0].state.name;
-                    // var text = $("<td>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                     $("#shows-container").append($("<tr>")
+                }
+                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
                      .append($("<td>").append(state))
-                     .append($("<td>").append(country)));
-                    
-                }
-                else{
-                    // var text = $("<td>").text(eventName + " " + venueName + " " + city + ", " + country);
-                    $("#shows-container").append($("<tr>")
-                    .append($("<td>").append(eventName))
-                    .append($("<td>").append(venueName))
-                    .append($("<td>").append(city))
-                    .append($("<td>").append(state))
-                    .append($("<td>").append(country)));
-                }
-                
+                     .append($("<td>").append(country)));  
             }
         });
     }
@@ -101,5 +90,7 @@ $(document).ready(function(){
     else{
         $("#shows-container").text("no upcoming events");
     }
-
+    $(document).on("click", ".show", function(){
+        window.open($(this).attr("show-link"));
+    })
 })

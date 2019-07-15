@@ -1,6 +1,3 @@
-/* Hello */
-
-
 #navBar{
     height: 70px;
 }
@@ -51,6 +48,13 @@ footer.page-footer {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
+
+.dropdown-content {
+    max-height: 350px !important;
+    overflow-y: auto !important;
+    backface-visibility: hidden !important;
+    /* top: -350px; */
+ }
 
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
