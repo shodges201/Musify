@@ -1,16 +1,16 @@
 #shows {
-        margin-top: 7px;
-        padding: 15px;
-        width: 100%;
-        height: 90vh;
-        overflow: auto;
-        border: 1px solid #ccc;
+    margin-top: 7px;
+    padding: 15px;
+    width: 100%;
+    height: 90vh;
+    overflow: auto;
+    border: 1px solid #ccc;
 }
 
 #links {
     margin-top: 0%;
 }
 
-.social-media{
+.social-media {
     color: white;
 }
