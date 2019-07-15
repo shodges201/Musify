@@ -14,14 +14,14 @@ $(document).ready(function(){
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("instagram") !== ""){
-        var linkURL = localStorage.getItem("instagram");
+    if(localStorage.getItem("artistInstagram") !== ""){
+        var linkURL = localStorage.getItem("artistInstagram");
         var link = $("<a>").attr("href", linkURL).text("Instagram").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("twitter") !== ""){
-        var linkURL = localStorage.getItem("twitter");
+    if(localStorage.getItem("artistTwitter") !== ""){
+        var linkURL = localStorage.getItem("artistTwitter");
         linkURL = linkURL.replace("https://twitter.com/","")
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
@@ -33,8 +33,8 @@ $(document).ready(function(){
             }
           );
     }
-    if(localStorage.getItem("youtube") !== ""){
-        var linkURL = localStorage.getItem("youtube");
+    if(localStorage.getItem("artistYoutube") !== ""){
+        var linkURL = localStorage.getItem("artistYoutube");
         var listItem = $("<li>");
         // linkURL = linkURL.replace("https://www.youtube.com/user/", "");
         // var options = {
@@ -47,8 +47,8 @@ $(document).ready(function(){
         listItem.append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("facebook") !== ""){
-        var linkURL = localStorage.getItem("facebook");
+    if(localStorage.getItem("artistFacebook") !== ""){
+        var linkURL = localStorage.getItem("artistFacebook");
         var link = $("<a>").attr("href", linkURL).text("Facebook").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
@@ -73,27 +73,16 @@ $(document).ready(function(){
                 var venueName = response._embedded.events[i]._embedded.venues[0].name;
                 var city = response._embedded.events[i]._embedded.venues[0].city.name;
                 var country = response._embedded.events[i]._embedded.venues[0].country.name;
+                var goToURL = response._embedded.events[i].url;
                 if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
                     var state = response._embedded.events[i]._embedded.venues[0].state.name;
-                    // var text = $("<td>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                     $("#shows-container").append($("<tr>")
+                }
+                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
                      .append($("<td>").append(state))
-                     .append($("<td>").append(country)));
-                    
-                }
-                else{
-                    // var text = $("<td>").text(eventName + " " + venueName + " " + city + ", " + country);
-                    $("#shows-container").append($("<tr>")
-                    .append($("<td>").append(eventName))
-                    .append($("<td>").append(venueName))
-                    .append($("<td>").append(city))
-                    .append($("<td>").append(state))
-                    .append($("<td>").append(country)));
-                }
-                
+                     .append($("<td>").append(country)));  
             }
         });
     }
@@ -101,5 +90,7 @@ $(document).ready(function(){
     else{
         $("#shows-container").text("no upcoming events");
     }
-
+    $(document).on("click", ".show", function(){
+        window.open($(this).attr("show-link"));
+    })
 })
