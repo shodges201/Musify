@@ -8,7 +8,6 @@ $(document).ready(function(){
       });
  //   $('.tap-target').tapTarget();
 
-localStorage.clear();
 var numResults = "20";
 var searchTerm = "";
 var state = "";
@@ -19,14 +18,17 @@ var artist= "";
 var local = "";
 var venueName = "";
 var venueState = "";
+var venueTwitter = "";
+var venueId = "";
+var venueImage = "";
 var expanded = false;
 var queryURL = "";
 var search = "";
-var youtube = "";
-var twitter = "";
-var instagram = "";
-var facebook = "";
-var itunes = "";
+var artistYoutube = "";
+var artistTwitter = "";
+var artistInstagram = "";
+var artistFacebook = "";
+var artistItunes = "";
 var displayingResults = false;
 
 $(window).keydown(function(event){
@@ -155,26 +157,26 @@ function logArtistData(index){
     for(var i = 0; i < linksLength; i++){
         var link = linksList[i];
         if(link === "youtube"){
-            youtube = json._embedded.attractions[index].externalLinks.youtube[0].url;   
+            artistYoutube = json._embedded.attractions[index].externalLinks.youtube[0].url;   
         }
         else if(link === "facebook"){
-            facebook = json._embedded.attractions[index].externalLinks.facebook[0].url;
+            artistFacebook = json._embedded.attractions[index].externalLinks.facebook[0].url;
         }
         else if(link === "twitter"){
-            twitter = json._embedded.attractions[index].externalLinks.twitter[0].url;
+            artistTwitter = json._embedded.attractions[index].externalLinks.twitter[0].url;
         }
         else if(link === "instagram"){
-            instagram = json._embedded.attractions[index].externalLinks.instagram[0].url;
+            artistInstagram = json._embedded.attractions[index].externalLinks.instagram[0].url;
         }
         else if(link === "itunes"){
-            itunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
+            artistItunes = json._embedded.attractions[index].externalLinks.itunes[0].url;
         }
     }
-    localStorage.setItem("youtube", youtube);
-    localStorage.setItem("facebook", facebook);
-    localStorage.setItem("twitter", twitter);
-    localStorage.setItem("instagram", instagram);
-    localStorage.setItem("itunes", itunes);
+    localStorage.setItem("artistYoutube", artistYoutube);
+    localStorage.setItem("artistFacebook", artistFacebook);
+    localStorage.setItem("artistTwitter", artistTwitter);
+    localStorage.setItem("artistInstagram", artistInstagram);
+    localStorage.setItem("artistItunes", artistItunes);
     console.log(imageURL);
     localStorage.setItem("artistName", artist);
     localStorage.setItem("imageURL", imageURL);
@@ -306,12 +308,12 @@ $(document).on("click", ".venueLink", function(event){
 
 function logVenueData(index){
     if(json._embedded.venues[index].social !== undefined){
-        twitter = json._embedded.venues[index].social.twitter.handle;
+        venueTwitter = json._embedded.venues[index].social.twitter.handle;
     }
-    localStorage.setItem("twitter", twitter);
-    var venueName = json._embedded.venues[index].name;
-    var venueId = json._embedded.venues[index].id;
-    var venueImage = json._embedded.venues[index].images[0].url;
+    localStorage.setItem("venueTwitter", venueTwitter);
+    venueName = json._embedded.venues[index].name;
+    venueId = json._embedded.venues[index].id;
+    venueImage = json._embedded.venues[index].images[0].url;
     localStorage.setItem("venueName", venueName);
     localStorage.setItem("venueId", venueId);
     localStorage.setItem("venueImage", venueImage);
@@ -334,50 +336,22 @@ function locationDisplay(){
     var inputSection = $("<div>").attr("id", "inputSection");
     $("#middleSection").append(inputSection);
 
-    //location name
-    var newRow = $("<div>").addClass("row");
-    var newCol = $("<form>").addClass("col s12");
-    var smallerRow = $("<div>").addClass("row");
-    var inputRow = $("<div>").addClass("input-field col s6");
-    var inputField = $("<input>").attr("type", "text").attr("id", "localName").addClass("validate").attr("placeholder", "Location");
-
-    inputRow.append(inputField);
-    smallerRow.append(inputRow);
-    newCol.append(smallerRow);
-    newRow.append(newCol);
-    inputSection.append(newRow);
-
-
-     //State
-     inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "state").addClass("validate").attr("placeholder", "State");
- 
-     inputRow.append(inputField);
-     smallerRow.append(inputRow);
-
-     //Zip Code
-     inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "zipCode").addClass("validate").attr("placeholder", "Zip Code");
- 
-     inputRow.append(inputField);
-     smallerRow.append(inputRow);
- 
      //City
      newRow = $("<div>").addClass("row");
      newCol = $("<form>").addClass("col s12");
      smallerRow = $("<div>").addClass("row");
      inputRow = $("<div>").addClass("input-field col s6");
-     inputField = $("<input>").attr("type", "text").attr("id", "city").addClass("validate").attr("placeholder", "City");
+     inputField = $("<input>").attr("type", "text").attr("id", "locationCity").addClass("validate").attr("placeholder", "City");
  
      inputRow.append(inputField);
      smallerRow.append(inputRow);
      newCol.append(smallerRow);
      newRow.append(newCol);
      inputSection.append(newRow);
- 
-     //Radius
+
+     //State
      inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "radius").addClass("validate").attr("placeholder", "Radius");
+     inputField = $("<input>").attr("type", "text").attr("id", "locationState").addClass("validate").attr("placeholder", "State");
  
      inputRow.append(inputField);
      smallerRow.append(inputRow);
@@ -416,17 +390,15 @@ $("#location-search").on("click", function(){
 
 $(document).on("click", "#locationBtn", function(event){
     //event.preventDefault();
-    console.log("searched");
-    local = $("#localName").val();
-    localStorage.setItem("local", local);
-    state = $("#state").val();
-    localStorage.setItem("stateName", state);
-    city = $("#city").val();
-    localStorage.setItem("cityName", city);
-    zipCode = $("#zipCode").val();
-    localStorage.setItem("zipCode", zipCode);
-    radius = $("#radius").val();
-    localStorage.setItem("radius", radius);
+    //console.log("searched");
+    logLocationData();
 })
+
+function logLocationData(){
+    state = $("#locationState").val().trim();
+    localStorage.setItem("locationState", state);
+    city = $("#locationCity").val().trim();
+    localStorage.setItem("locationCity", city);
+}   
 
 });

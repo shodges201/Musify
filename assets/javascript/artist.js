@@ -14,14 +14,14 @@ $(document).ready(function(){
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("instagram") !== ""){
-        var linkURL = localStorage.getItem("instagram");
+    if(localStorage.getItem("artistInstagram") !== ""){
+        var linkURL = localStorage.getItem("artistInstagram");
         var link = $("<a>").attr("href", linkURL).text("Instagram").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("twitter") !== ""){
-        var linkURL = localStorage.getItem("twitter");
+    if(localStorage.getItem("artistTwitter") !== ""){
+        var linkURL = localStorage.getItem("artistTwitter");
         linkURL = linkURL.replace("https://twitter.com/","")
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
@@ -33,8 +33,8 @@ $(document).ready(function(){
             }
           );
     }
-    if(localStorage.getItem("youtube") !== ""){
-        var linkURL = localStorage.getItem("youtube");
+    if(localStorage.getItem("artistYoutube") !== ""){
+        var linkURL = localStorage.getItem("artistYoutube");
         var listItem = $("<li>");
         // linkURL = linkURL.replace("https://www.youtube.com/user/", "");
         // var options = {
@@ -47,8 +47,8 @@ $(document).ready(function(){
         listItem.append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("facebook") !== ""){
-        var linkURL = localStorage.getItem("facebook");
+    if(localStorage.getItem("artistFacebook") !== ""){
+        var linkURL = localStorage.getItem("artistFacebook");
         var link = $("<a>").attr("href", linkURL).text("Facebook").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
