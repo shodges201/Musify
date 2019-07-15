@@ -1,7 +1,12 @@
 /* Hello */
 
+
+#navBar{
+    height: 70px;
+}
 .parallax{
     position:static;
+
   }
 nav ul a,
 nav .brand-logo {
@@ -21,6 +26,7 @@ p {
     line-height: 0;
     height: auto;
     color: rgba(255, 255, 255, .9);
+    width: 100%;
 }
 .parallax-container .section {
     width: 100%;
