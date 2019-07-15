@@ -4,7 +4,7 @@ $(document).ready(function(){
     var venueImage = localStorage.getItem("venueImage");
     $("#venue-image").attr("src", venueImage);
     var venueURL = "https://app.ticketmaster.com/discovery/v2/events.json?venueId=" + venueId + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-    $("#venueName").text(venueName);
+    $("#venue-name").text(venueName);
     if(localStorage.getItem("venueTwitter") !== ""){
         var linkURL = localStorage.getItem("twitter");
         linkURL = linkURL.replace("@","")
