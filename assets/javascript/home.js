@@ -43,7 +43,8 @@ $(document).ready(function(){
                     $("#link-container").remove();
                 }
                 venueSearch();
-
+            }
+        }
       });
  //   $('.tap-target').tapTarget();
 
@@ -80,71 +81,6 @@ $(window).keydown(function(event){
             }
             artistSearch();
         }
-        else if(search === "venue"){
-            if(displayingResults === true){
-                $("#link-container").remove();
-            }
-            venueSearch();
-        }
-        else if(search === "location"){
-            if(displayingResults === true){
-                $("#link-container").remove();
-            }
-            logLocationData();
-            window.location.href = "assets/html/location.html"
-        }
-    }
-})
-
-    })
-
-    ////// ARTIST SEARCH SECTION
-    function artistDisplay() {
-        //Name
-        var inputSection = $("<div>").attr("id", "inputSection");
-        $("#middleSection").append(inputSection);
-        $("#buttonsSections").css("margin-bottom", "20px");
-
-        var newRow = $("<div>").addClass("row").attr("id", "firstRow");
-        var newCol = $("<form>").addClass("col s6");
-        var smallerRow = $("<div>").addClass("row");
-        var inputRow = $("<div>").addClass("input-field col s12");
-        var inputField = $("<input>").attr("type", "text").attr("id", "artistName").addClass("validate").attr("placeholder", "Artist Name");
-
-        inputRow.append(inputField);
-        smallerRow.append(inputRow);
-        newCol.append(smallerRow);
-        newRow.append(newCol);
-        inputSection.append(newRow);
-        $("#inputSection").append(newRow);
-
-        newRow = $("<div>").addClass("row");
-        newCol = $("<form>").addClass("col s1");
-        var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
-
-
-        newCol.append(btn);
-        newRow.append(newCol);
-        inputSection.append(newRow);
-    }
-
-    $("#artist-search").on("click", function () {
-        console.log("clicked");
-        if (expanded && search === "artist") {
-            $("#inputSection").remove();
-            $("#buttonsSections").css("margin-bottom", "0px");
-            expanded = false;
-            displayingResults = false;
-        } else if (expanded && search !== "artist") {
-            $("#inputSection").remove();
-            artistDisplay();
-            expanded = true;
-            search = "artist";
-        } else {
-            artistDisplay();
-            expanded = true;
-            search = "artist";
-
         else if(search === "venue"){
             if(displayingResults === true){
                 $("#link-container").remove();
