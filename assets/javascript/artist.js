@@ -63,8 +63,6 @@ $(document).ready(function(){
         }).then(function(response) {
             json = response;
             $("#shows-container").empty();
-            //var newContent = $("<div>").text(JSON.stringify(response));
-            //$("#shows-container").append(newContent);
             for(var i = 0; i < response._embedded.events.length; i++){
                 console.log(response._embedded.events[i]);
                 var startDate = response._embedded.events[i].dates.start.localDate;

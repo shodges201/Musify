@@ -75,3 +75,7 @@ input:-webkit-autofill {
         top: 0;
     }
 }
+
+input{
+    color: lightgrey;
+}
