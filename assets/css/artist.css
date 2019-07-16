@@ -37,6 +37,16 @@ nav a:hover {
 #links {
     margin-left: 5px;
 }
+
+.social-media{
+    color: black;
+    font-weight: bold;
+}
+
+.social-media-container{
+    margin-top: 5px;
+}
+
 #artistIMG{
     margin-top: 30%;
 }
