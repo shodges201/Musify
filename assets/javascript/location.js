@@ -1,22 +1,21 @@
 var locationState = localStorage.getItem("locationState");
 var locationCity = localStorage.getItem("locationCity");
 
-if(localStorage.getItem("gps") === "false"){
-    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&stateCode=" + locationState +"&city=" + locationCity + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-}
-else{
+if (localStorage.getItem("gps") === "false") {
+    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&stateCode=" + locationState + "&city=" + locationCity + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+} else {
     var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&geoPoint=" + localStorage.getItem("hash") + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
 }
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     $.ajax({
         url: locationURL,
         method: "GET"
-    }).then(function(response){
+    }).then(function (response) {
         json = response;
         $("#shows-container").empty();
-        for(var i = 0; i < response._embedded.events.length; i++){
+        for (var i = 0; i < response._embedded.events.length; i++) {
             var startDate = response._embedded.events[i].dates.start.localDate;
             if(startDate != undefined){
                 console.log(formatDate(startDate));
@@ -33,13 +32,13 @@ $(document).ready(function(){
             var city = response._embedded.events[i]._embedded.venues[0].city.name;
             var country = response._embedded.events[i]._embedded.venues[0].country.name;
             var goToURL = response._embedded.events[i].url;
-            if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
+            if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
                 var state = response._embedded.events[i]._embedded.venues[0].state.name;
                 // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
                 $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                     .append($("<td>").append(eventName))
-                     .append($("<td>").append(venueName))
-                     .append($("<td>").append(city))
+                    .append($("<td>").append(eventName))
+                    .append($("<td>").append(venueName))
+                    .append($("<td>").append(city))
                     // .append($("<td>").append(state))
                      .append($("<td>").append(country))
                      .append($("<td>").append(startDate))
@@ -57,27 +56,31 @@ $(document).ready(function(){
                      .append($("<td>").append(startDate))
                      .append($("<td>").append(startTime)));
             }
-            
+
         }
         var locationDisplayName = response._embedded.events[0]._embedded.venues[0].city.name;
         $("#location-name").text(locationDisplayName);
         $("#location-image").attr("src", response._embedded.events[0].images[0].url);
     })
-    $(document).on("click", ".show", function(){
+    $(document).on("click", ".show", function () {
         window.open($(this).attr("show-link"));
     })
 
-    $("#artist-btn").on("click", function(event){
-        if(localStorage.getItem("artistID") == null || localStorage.getItem("artistID") === ""){
+    $("#artist-btn").on("click", function (event) {
+        if (localStorage.getItem("artistID") == null || localStorage.getItem("artistID") === "") {
             event.preventDefault();
-            M.toast({html: 'Return to the home page to search for a location first!'})
+            M.toast({
+                html: 'Return to the home page to search for a location first!'
+            })
         }
     })
 
-    $("#venue-btn").on("click", function(event){
-        if(localStorage.getItem("venueId") == null || localStorage.getItem("venueId") == ""){
+    $("#venue-btn").on("click", function (event) {
+        if (localStorage.getItem("venueId") == null || localStorage.getItem("venueId") == "") {
             event.preventDefault();
-            M.toast({html: 'Return to the home page to search for a venue first!'})
+            M.toast({
+                html: 'Return to the home page to search for a venue first!'
+            })
         }
     })
 

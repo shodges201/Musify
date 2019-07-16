@@ -2,7 +2,7 @@
     margin-top: 7px;
     padding: 15px;
     width: 100%;
-    height: 90vh;
+    height: 87vh;
     overflow: auto;
     border: 1px solid #ccc;
 }
@@ -15,14 +15,25 @@
     color: white;
 }
 
-.show{
+.show {
     cursor: pointer;
 }
 
 nav ul li:hover {
     background-color: orange;
- }
+}
 
- nav a:hover {
+nav a:hover {
     background-color: orange;
- }
+}
+
+#locationIMG,
+#venueIMG {
+    margin-left: 5px;
+    margin-top: 50%;
+}
+
+#artistIMG,
+#links {
+    margin-left: 5px;
+}
