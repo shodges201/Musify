@@ -41,5 +41,8 @@ nav a:hover {
 .social-media{
     color: black;
     font-weight: bold;
-    margin-top: 20px;
+}
+
+.social-media-container{
+    margin-top: 5px;
 }
