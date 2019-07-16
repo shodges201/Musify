@@ -1,13 +1,6 @@
-$(document).ready(function(){
+var hash = GeoHasher.encode(38.897, -77.036);
 
-    $('.parallax').parallax();
-    $('.sidenav').sidenav();
-    $('.carousel.carousel-slider').carousel({
-        fullWidth: true,
-        indicators: true
-
-    });
-
+var pos = "";
 var numResults = "20";
 var searchTerm = "";
 var state = "";
@@ -31,6 +24,23 @@ var artistItunes = "";
 var displayingResults = false;
 var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 var stateAbrev = ["AK","AL","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+var usedGPS = false;
+
+$(document).ready(function(){
+
+    $('.parallax').parallax();
+    $('.sidenav').sidenav();
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true
+
+    });
+
+//full state names not currently used
+var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+//state abreviations used for populating dropdown selectors
+var stateAbrev = ["AK","AL","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+
 $(window).keydown(function(event){
     if(event.keyCode == 13) {
         event.preventDefault();
@@ -268,9 +278,9 @@ $("#venue-search").on("click", function(){
     }  
 })
 function venueSearch(){
-    var venue = $("#venueName").val().trim();
-    var state = stateAbrev[$("#stateVal").val()];
-    queryURL = "https://app.ticketmaster.com/discovery/v2/venues.json?stateCode=" + state + "&keyword="+ venue +"&sort=relevance,desc&apikey=UpMLmiplG7uNV9Gbe2W1u5v6GFAFAAXd";
+    var venueName = $("#venueName").val().trim();
+    var stateName = stateAbrev[$("#stateVal").val()];
+    queryURL = "https://app.ticketmaster.com/discovery/v2/venues.json?stateCode=" + stateName + "&keyword="+ venueName +"&sort=relevance,desc&apikey=UpMLmiplG7uNV9Gbe2W1u5v6GFAFAAXd";
     //queries to find attraction/artist
     $.ajax({
         url: queryURL,
@@ -359,7 +369,7 @@ function locationDisplay(){
      inputSection.append(newRow);
 
     //State
-    inputRow = $("<div>").addClass("input-field col s6");
+    inputRow = $("<div>").addClass("input-field col s3");
     //inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
     var trigger = $("<select>").attr("id", "stateVal").append($('<option value="" disabled selected>State</option>'));
     for(var i = 0; i < stateAbrev.length; i++){
@@ -373,10 +383,14 @@ function locationDisplay(){
 
     $('select').formSelect();
 
+    inputRow = $("<div>").addClass("input-field col s3");
+    var btn = $("<a>").addClass("waves-effect waves-light btn").text("location").attr("id", "getLoc");
+    inputRow.append(btn);
+    smallerRow.append(inputRow);
     
      newRow = $("<div>").addClass("row");
      newCol = $("<form>").addClass("col s1");
-     var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn").attr("href", "assets/html/location.html");
+     btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn").attr("href", "assets/html/location.html");
  
      newCol.append(btn);
      newRow.append(newCol);
@@ -403,11 +417,7 @@ $("#location-search").on("click", function(){
     }
 })
 
-///////// END LOCATION SEARCH SECTION ///////////////
-
 $(document).on("click", "#locationBtn", function(event){
-    //event.preventDefault();
-    //console.log("searched");
     logLocationData();
 })
 
@@ -416,9 +426,37 @@ function logLocationData(){
     localStorage.setItem("locationState", state);
     city = $("#locationCity").val().trim();
     localStorage.setItem("locationCity", city);
+    localStorage.setItem("gps", usedGPS);
 }
+
+$(document).on("click", "#getLoc", function(){
+    usedGPS = true;
+    navigator.geolocation.getCurrentPosition(success, error);
+})
+
+function success(position){
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    var hash = GeoHasher.encode(lat, long, 6);
+    console.log(hash);
+    logGPS(hash);
+}
+function error(){
+    console.log("failed");
+    M.toast({html: 'Unable to locate position. Try turning on location services, and accepting the location prompt.'})
+}
+
+function logGPS(hash){
+    localStorage.setItem("gps", usedGPS);
+    localStorage.setItem("hash", hash);
+    window.location.href = "assets/html/location.html"
+}
+
+///////// END LOCATION SEARCH SECTION ///////////////
+
 $(".dropdown-trigger").dropdown();
 
+//changes color of text on dropdown to black after user selects it
 $(document).on("click", ".dropdown-trigger", function(){
     setTimeout(1500, null);
     $(this).css("color", "black");
