@@ -41,7 +41,9 @@ $(document).ready(function(){
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
                     // .append($("<td>").append(state))
-                     .append($("<td>").append(country)));
+                     .append($("<td>").append(country))
+                     .append($("<td>").append(startDate))
+                     .append($("<td>").append(startTime)));
             }
             
             else{
