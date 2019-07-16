@@ -4,7 +4,6 @@
 
 .parallax {
     position: static;
-
 }
 
 nav ul a,
@@ -30,8 +29,8 @@ p {
 
 .parallax-container .section {
     width: 100%;
-    
 }
+
 footer.page-footer {
     margin: 0;
 }
@@ -39,7 +38,6 @@ footer.page-footer {
 #buttonsSections {
     margin-bottom: 0px;
 }
-
 
 .dropdown-content {
     max-height: 350px !important;
@@ -58,36 +56,62 @@ nav ul li:hover {
 nav a:hover {
     color: orange;
 }
-#artist-search {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    border: 1px solid black;
-  }
-  
+
 #artist-search:hover {
     color: black;
-    
-  }
-  #venue-search {
-    -webkit-transition-duration: 0.4s; /* Safari */
+}
+
+#venue-search {
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
     transition-duration: 0.4s;
     border: 1px solid black;
-  }
-  
+}
+
 #venue-search:hover {
     color: black;
-    
-  }
-  #location-search {
-    -webkit-transition-duration: 0.4s; /* Safari */
+}
+
+#artistBtn,
+#venueBtn,
+#locationBtn,
+#getLoc,
+#location-search,
+#venue-search,
+#artist-search {
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
     transition-duration: 0.4s;
     border: 1px solid black;
-  }
-  
+}
+
+#artistBtn:hover {
+    color: black;
+}
+
+#venueBtn:hover {
+    color: black;
+}
+
+#locationBtn:hover {
+    color: black;
+}
+
+#getLoc:hover {
+    color: black;
+}
+
 #location-search:hover {
     color: black;
-    
-  }
+}
+
+#venue-search:hover {
+    color: black;
+}
+
+#artist-search:hover {
+    color: black;
+}
 
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
