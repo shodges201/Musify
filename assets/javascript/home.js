@@ -454,8 +454,6 @@ function logGPS(hash){
 
 ///////// END LOCATION SEARCH SECTION ///////////////
 
-$(".dropdown-trigger").dropdown();
-
 //changes color of text on dropdown to black after user selects it
 $(document).on("click", ".dropdown-trigger", function(){
     setTimeout(1500, null);

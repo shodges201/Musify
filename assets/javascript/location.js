@@ -23,10 +23,11 @@ $(document).ready(function(){
             var venueName = response._embedded.events[i]._embedded.venues[0].name;
             var city = response._embedded.events[i]._embedded.venues[0].city.name;
             var country = response._embedded.events[i]._embedded.venues[0].country.name;
+            var goToURL = response._embedded.events[i].url;
             if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
                 var state = response._embedded.events[i]._embedded.venues[0].state.name;
                 // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                $("#shows-container").append($("<tr>")
+                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
@@ -37,7 +38,7 @@ $(document).ready(function(){
             else{
                 // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
                 // $("#shows-container").append(text);
-                $("#shows-container").append($("<tr>")
+                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
@@ -48,5 +49,8 @@ $(document).ready(function(){
         var locationDisplayName = response._embedded.events[0]._embedded.venues[0].city.name;
         $("#location-name").text(locationDisplayName);
         $("#location-image").attr("src", response._embedded.events[0].images[0].url);
+    })
+    $(document).on("click", ".show", function(){
+        window.open($(this).attr("show-link"));
     })
 })
