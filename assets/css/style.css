@@ -1,11 +1,6 @@
-#navBar{
+#navBar {
     height: 70px;
 }
-/* #arrowImg{
-    text-align: center;
-    height: 50px;
-    width: 50px;
-} */
 
 .parallax {
     position: static;
@@ -62,17 +57,30 @@ input:-webkit-autofill {
     overflow-y: auto !important;
     backface-visibility: hidden !important;
     /* top: -350px; */
- }
+}
+
+.dropdown-trigger {
+    color: lightgrey;
+}
+
+nav ul li:hover {
+    background-color: orange;
+}
+
+nav a:hover {
+    background-color: orange;
+}
 
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
         position: absolute;
         background-color: brown;
-        
+
     }
 
-   
+
 }
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width : 600px) {
     .parallax-container .section {
@@ -81,15 +89,3 @@ input:-webkit-autofill {
 
     }
 }
-
-.dropdown-trigger{
-    color: lightgrey;
-}
-
-nav ul li:hover {
-    background-color: orange;
- }
-
- nav a:hover {
-    background-color: orange;
- }
