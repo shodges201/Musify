@@ -21,9 +21,13 @@ var artistTwitter = "";
 var artistInstagram = "";
 var artistFacebook = "";
 var artistItunes = "";
+var sortBy = "";
 var displayingResults = false;
 var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 var stateAbrev = ["AK", "AL", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+var sortList = ["relevance,desc", "date,asc"];
+var sortText = ["revelance", "date"];
+var radius = ["10", "15", "25", "35", "50", "75", "100"];
 var usedGPS = false;
 
 $(document).ready(function () {
@@ -378,7 +382,7 @@ $(document).ready(function () {
         newRow = $("<div>").addClass("row");
         newCol = $("<form>").addClass("col s12");
         smallerRow = $("<div>").addClass("row");
-        inputRow = $("<div>").addClass("input-field col s6");
+        inputRow = $("<div>").addClass("input-field col s4");
         inputField = $("<input>").attr("type", "text").attr("id", "locationCity").addClass("validate").attr("placeholder", "City");
 
         inputRow.append(inputField);
@@ -388,7 +392,7 @@ $(document).ready(function () {
         inputSection.append(newRow);
 
         //State
-        inputRow = $("<div>").addClass("input-field col s3");
+        inputRow = $("<div>").addClass("input-field col s2");
         var trigger = $("<select>").attr("id", "stateVal").append($('<option value="" disabled selected>State</option>'));
         for (var i = 0; i < stateAbrev.length; i++) {
             var item = $("<option>").attr("value", i).text(stateAbrev[i]);
@@ -399,9 +403,33 @@ $(document).ready(function () {
         inputRow.append(trigger);
         smallerRow.append(inputRow);
 
+        //sort by
+        inputRow = $("<div>").addClass("input-field col s2");
+        var sort = $("<select>").attr("id", "sortBy").append($('<option value="" disabled selected>Sort By</option>'));
+        for (var i = 0; i < sortText.length; i++) {
+            var item = $("<option>").attr("value", i).text(sortText[i]);
+            sort.append(item);
+            console.log(stateAbrev[i]);
+        }
+
+        inputRow.append(sort);
+        smallerRow.append(inputRow);
+
+        //radius
+        inputRow = $("<div>").addClass("input-field col s2");
+        var radiusSelect = $("<select>").attr("id", "radius").append($('<option value="" disabled selected>Radius</option>'));
+        for (var i = 0; i < radius.length; i++) {
+            var item = $("<option>").attr("value", i).text(radius[i]);
+            radiusSelect.append(item);
+            console.log(radius[i]);
+        }
+
+        inputRow.append(radiusSelect);
+        smallerRow.append(inputRow);
+
         $('select').formSelect();
 
-        inputRow = $("<div>").addClass("input-field col s3");
+        inputRow = $("<div>").addClass("input-field col s2");
         var btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").attr("id", "getLoc").append($('<i class="fas fa-location-arrow" id="arrowImg"></i>'));
         inputRow.append(btn);
         smallerRow.append(inputRow);
@@ -438,11 +466,14 @@ $(document).ready(function () {
     })
 
     function logLocationData() {
+        sortBy = sortList[$("#sortBy").val()];
         state = stateAbrev[$("#stateVal").val()];
         localStorage.setItem("locationState", state);
         city = $("#locationCity").val().trim();
         localStorage.setItem("locationCity", city);
         localStorage.setItem("gps", usedGPS);
+        localStorage.setItem("sortBy", sortBy);
+        localStorage.setItem("radius", radius[$("#radius").val()]);
     }
 
     $(document).on("click", "#getLoc", function () {
@@ -453,7 +484,7 @@ $(document).ready(function () {
     function success(position) {
         var lat = position.coords.latitude;
         var long = position.coords.longitude;
-        var hash = GeoHasher.encode(lat, long, 6);
+        var hash = GeoHasher.encode(lat, long, 8);
         console.log(hash);
         logGPS(hash);
     }
@@ -468,7 +499,10 @@ $(document).ready(function () {
     function logGPS(hash) {
         localStorage.setItem("gps", usedGPS);
         localStorage.setItem("hash", hash);
-        window.location.href = "assets/html/location.html"
+        localStorage.setItem("radius", radius[$("#radius").val()]);
+        sortBy = sortList[$("#sortBy").val()];
+        localStorage.setItem("sortBy", sortBy);
+        window.location.href = "assets/html/location.html";
     }
 
     ///////// END LOCATION SEARCH SECTION ///////////////

@@ -1,12 +1,32 @@
 var locationState = localStorage.getItem("locationState");
 var locationCity = localStorage.getItem("locationCity");
+var sortBy = "relevance,desc";
+var radius = "25";
 
 if (localStorage.getItem("gps") === "false") {
-    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&stateCode=" + locationState + "&city=" + locationCity + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+    if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
+        console.log("a" + localStorage.getItem("sortBy"));
+        sortBy = localStorage.getItem("sortBy");
+    }
+    if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
+        radius = localStorage.getItem("radius");
+    }
+    else{
+        console.log("b" + localStorage.getItem("sortBy"));
+        var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=" + locationState + "&city=" + locationCity + "&sort=" + sortBy + "&radius=" + radius + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+    }
 } else {
-    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&geoPoint=" + localStorage.getItem("hash") + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
+    if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
+        console.log("c" + localStorage.getItem("sortBy"));
+        sortBy = localStorage.getItem("sortBy");
+    }
+    if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
+        radius = localStorage.getItem("radius");
+    }
+    console.log("d" + localStorage.getItem("sortBy"));
+    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?geoPoint=" + localStorage.getItem("hash") + "&sort=" + sortBy + "&radius=" + radius + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
 }
-
+console.log(locationURL);
 
 $(document).ready(function () {
     $.ajax({
