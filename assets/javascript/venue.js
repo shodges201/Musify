@@ -6,7 +6,6 @@ $(document).ready(function () {
     var startTime = "";
     $("#venue-image").attr("src", venueImage);
     var venueURL = "https://app.ticketmaster.com/discovery/v2/events.json?venueId=" + venueId + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-   
     $("#venue-name").text(venueName);
     if(localStorage.getItem("venueTwitter") !== ""){
         var linkURL = localStorage.getItem("venueTwitter");
@@ -23,53 +22,59 @@ $(document).ready(function () {
     }
     $.ajax({
         url: venueURL,
-        method: "GET"
-    }).then(function (response) {
-        json = response;
-        $("#shows-container").empty();
+        method: "GET",
+        success: function(response){
+            json = response;
+            $("#shows-container").empty();
 
-        for (var i = 0; i < response._embedded.events.length; i++) {
-            var startDate = response._embedded.events[i].dates.start.localDate;
-            if(startDate != undefined){
-                console.log(formatDate(startDate));
-                startDate = formatDate(startDate);
-            }
-            var startTime = response._embedded.events[i].dates.start.localTime;
-            if(startTime != undefined){
-                console.log(startTime);
-                console.log(formatTime(startTime));
-                startTime = formatTime(startTime);
-            }
-            var eventName = response._embedded.events[i].name;
-            var venueName = response._embedded.events[i]._embedded.venues[0].name;
-            var city = response._embedded.events[i]._embedded.venues[0].city.name;
-            var country = response._embedded.events[i]._embedded.venues[0].country.name;
-            var goToURL = response._embedded.events[i].url;
-            if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
-                var state = response._embedded.events[i]._embedded.venues[0].state.name;
-                // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                .append($("<td>").append(eventName))
-                .append($("<td>").append(venueName))
-                .append($("<td>").append(city))
-                .append($("<td>").append(state))
-                .append($("<td>").append(country))
-                .append($("<td>").append(startDate))
-                .append($("<td>").append(startTime)));
-            }
-            else{
-                // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
-                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                .append($("<td>").append(eventName))
-                .append($("<td>").append(venueName))
-                .append($("<td>").append(city))
-                .append($("<td>").append(country))
-                .append($("<td>").append(startDate))
-                .append($("<td>").append(startTime)));
-            }
+            for (var i = 0; i < response._embedded.events.length; i++) {
+                var startDate = response._embedded.events[i].dates.start.localDate;
+                if(startDate != undefined){
+                    console.log(formatDate(startDate));
+                    startDate = formatDate(startDate);
+                }
+                var startTime = response._embedded.events[i].dates.start.localTime;
+                if(startTime != undefined){
+                    console.log(startTime);
+                    console.log(formatTime(startTime));
+                    startTime = formatTime(startTime);
+                }
+                var eventName = response._embedded.events[i].name;
+                var venueName = response._embedded.events[i]._embedded.venues[0].name;
+                var city = response._embedded.events[i]._embedded.venues[0].city.name;
+                var country = response._embedded.events[i]._embedded.venues[0].country.name;
+                var goToURL = response._embedded.events[i].url;
+                if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
+                    var state = response._embedded.events[i]._embedded.venues[0].state.name;
+                    // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
+                    $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
+                    .append($("<td>").append(eventName))
+                    .append($("<td>").append(venueName))
+                    .append($("<td>").append(city))
+                    .append($("<td>").append(state))
+                    .append($("<td>").append(country))
+                    .append($("<td>").append(startDate))
+                    .append($("<td>").append(startTime)));
+                }
+                else{
+                    // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
+                    $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
+                    .append($("<td>").append(eventName))
+                    .append($("<td>").append(venueName))
+                    .append($("<td>").append(city))
+                    .append($("<td>").append(country))
+                    .append($("<td>").append(startDate))
+                    .append($("<td>").append(startTime)));
+                }
 
+            }
+        },
+        error(request, status, error){
+            M.toast({
+                html: 'There was error. Try reloading the page!'
+            })
         }
-    });
+    })
     $(document).on("click", ".show", function(){
         window.open($(this).attr("show-link"));
     })
