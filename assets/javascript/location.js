@@ -2,6 +2,7 @@ var locationState = localStorage.getItem("locationState");
 var locationCity = localStorage.getItem("locationCity");
 var sortBy = "relevance,desc";
 var radius = "25";
+var size = 20;
 
 if (localStorage.getItem("gps") === "false") {
     if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
@@ -11,10 +12,7 @@ if (localStorage.getItem("gps") === "false") {
     if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
         radius = localStorage.getItem("radius");
     }
-    else{
-        console.log("b" + localStorage.getItem("sortBy"));
-        var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=" + locationState + "&city=" + locationCity + "&sort=" + sortBy + "&radius=" + radius + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
-    }
+    var locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=" + locationState + "&city=" + locationCity + "&sort=" + sortBy + "&radius=" + radius + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
 } else {
     if(localStorage.getItem("sortBy") != null && localStorage.getItem("sortBy") != "undefined"){
         console.log("c" + localStorage.getItem("sortBy"));
@@ -35,7 +33,10 @@ $(document).ready(function () {
         success: function(response){
             json = response;
             $("#shows-container").empty();
-            for (var i = 0; i < response._embedded.events.length; i++) {
+            if(response.page.totalElements < 20){
+                size = response.page.totalElements;
+            }
+            for (var i = 0; i < size; i++) {
                 var startDate = response._embedded.events[i].dates.start.localDate;
                 if(startDate != undefined){
                     console.log(formatDate(startDate));
@@ -78,9 +79,20 @@ $(document).ready(function () {
                 }
 
             }
-            var locationDisplayName = response._embedded.events[0]._embedded.venues[0].city.name;
-            $("#location-name").text(locationDisplayName);
-            $("#location-image").attr("src", response._embedded.events[0].images[0].url);
+            if(size > 0){
+                var locationDisplayName = response._embedded.events[0]._embedded.venues[0].city.name;
+                $("#location-name").text(locationDisplayName);
+                $("#location-image").attr("src", response._embedded.events[0].images[0].url);
+            }
+            else{
+                var locationDisplayName = localStorage.getItem("locationCity");
+                locationCity = locationCity.split(" ");
+                var str = "";
+                for(var j = 0; j < locationCity.length; j++){
+                    str += locationCity[j][0].toUpperCase() + locationCity[j].substring(1) + " "; 
+                }
+                $("#location-name").text(str);
+            }
     },
     error(request, status, error){
         M.toast({

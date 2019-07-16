@@ -1,5 +1,3 @@
-var hash = GeoHasher.encode(38.897, -77.036);
-
 var pos = "";
 var numResults = "20";
 var searchTerm = "";
@@ -462,7 +460,15 @@ $(document).ready(function () {
     })
 
     $(document).on("click", "#locationBtn", function (event) {
-        logLocationData();
+        if($("#locationCity").val() != "" && $("#stateVal").val() != undefined){
+            logLocationData();
+        }
+        else{
+            M.toast({
+                html: 'Unable to process request. Please enter a city name and select a state, or use the arrow button for GPS location.'
+            })
+            event.preventDefault();
+        }
     })
 
     function logLocationData() {
