@@ -76,6 +76,6 @@ input:-webkit-autofill {
     }
 }
 
-input{
+.dropdown-trigger{
     color: lightgrey;
 }

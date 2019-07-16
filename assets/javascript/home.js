@@ -458,4 +458,9 @@ function logLocationData(){
     localStorage.setItem("locationCity", city);
 }
 $(".dropdown-trigger").dropdown();
+
+$(document).on("click", ".dropdown-trigger", function(){
+    setTimeout(1500, null);
+    $(this).css("color", "black");
+})
 });
