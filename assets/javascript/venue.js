@@ -44,7 +44,8 @@ $(document).ready(function () {
                 .append($("<td>").append(city))
                 .append($("<td>").append(state))
                 .append($("<td>").append(country)));
-            } else {
+            }
+            else{
                 // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
                 $("#shows-container").append($("<tr>")
                 .append($("<td>").append(eventName))
