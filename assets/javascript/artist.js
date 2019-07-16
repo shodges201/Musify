@@ -1,7 +1,7 @@
 var artist = "";
 var queryURL = "";
 var json = "";
-$(document).ready(function () {
+$(document).ready(function(){
     var artistID = localStorage.getItem("artistID");
     var artistName = localStorage.getItem("artistName");
     var imageURL = localStorage.getItem("imageURL");
@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#artist-image").attr("src", imageURL);
     if (localStorage.getItem("itunes") !== "") {
         var linkURL = localStorage.getItem("artistItunes");
-        var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+        var link = $("<a>").attr("href", linkURL).text("Apple Music").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
@@ -58,41 +58,47 @@ $(document).ready(function () {
         //queries to get artist events
         $.ajax({
             url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            json = response;
-            $("#shows-container").empty();
-            for (var i = 0; i < response._embedded.events.length; i++) {
-                console.log(response._embedded.events[i]);
-                var startDate = response._embedded.events[i].dates.start.localDate;
-                if(startDate != undefined){
-                    console.log(formatDate(startDate));
-                    startDate = formatDate(startDate);
+            method: "GET",
+            success: function(response){
+                json = response;
+                $("#shows-container").empty();
+                for (var i = 0; i < response._embedded.events.length; i++) {
+                    console.log(response._embedded.events[i]);
+                    var startDate = response._embedded.events[i].dates.start.localDate;
+                    if(startDate != undefined){
+                        console.log(formatDate(startDate));
+                        startDate = formatDate(startDate);
+                    }
+                    var startTime = response._embedded.events[i].dates.start.localTime;
+                    if(startTime != undefined){
+                        console.log(startTime);
+                        console.log(formatTime(startTime));
+                        startTime = formatTime(startTime);
+                    }
+                    var eventName = response._embedded.events[i].name;
+                    var venueName = response._embedded.events[i]._embedded.venues[0].name;
+                    var city = response._embedded.events[i]._embedded.venues[0].city.name;
+                    var country = response._embedded.events[i]._embedded.venues[0].country.name;
+                    var goToURL = response._embedded.events[i].url;
+                    if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
+                        var state = response._embedded.events[i]._embedded.venues[0].state.name;
+                    }
+                    $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
+                        .append($("<td>").append(eventName))
+                        .append($("<td>").append(venueName))
+                        .append($("<td>").append(city))
+                        .append($("<td>").append(state))
+                        .append($("<td>").append(country))
+                        .append($("<td>").append(startDate))
+                        .append($("<td>").append(startTime)));  
                 }
-                var startTime = response._embedded.events[i].dates.start.localTime;
-                if(startTime != undefined){
-                    console.log(startTime);
-                    console.log(formatTime(startTime));
-                    startTime = formatTime(startTime);
-                }
-                var eventName = response._embedded.events[i].name;
-                var venueName = response._embedded.events[i]._embedded.venues[0].name;
-                var city = response._embedded.events[i]._embedded.venues[0].city.name;
-                var country = response._embedded.events[i]._embedded.venues[0].country.name;
-                var goToURL = response._embedded.events[i].url;
-                if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
-                    var state = response._embedded.events[i]._embedded.venues[0].state.name;
-                }
-                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                     .append($("<td>").append(eventName))
-                     .append($("<td>").append(venueName))
-                     .append($("<td>").append(city))
-                     .append($("<td>").append(state))
-                     .append($("<td>").append(country))
-                     .append($("<td>").append(startDate))
-                     .append($("<td>").append(startTime)));  
             }
-        });
+            ,error: function(request, status, error){
+                M.toast({
+                    html: 'There was error. Try reloading the page!'
+                })
+            }
+        })
     }
     // no events to show
     else {

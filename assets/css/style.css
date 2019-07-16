@@ -30,16 +30,8 @@ p {
 
 .parallax-container .section {
     width: 100%;
+    
 }
-
-.icon-block {
-    padding: 0 15px;
-}
-
-.icon-block .material-icons {
-    font-size: inherit;
-}
-
 footer.page-footer {
     margin: 0;
 }
@@ -48,28 +40,54 @@ footer.page-footer {
     margin-bottom: 0px;
 }
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px white inset !important;
-}
 
 .dropdown-content {
     max-height: 350px !important;
     overflow-y: auto !important;
     backface-visibility: hidden !important;
-    /* top: -350px; */
 }
 
 .dropdown-trigger {
-    color: lightgrey;
+    color: black;
 }
 
 nav ul li:hover {
-    background-color: orange;
+    color: orange;
 }
 
 nav a:hover {
-    background-color: orange;
+    color: orange;
 }
+#artist-search {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: 1px solid black;
+  }
+  
+#artist-search:hover {
+    color: black;
+    
+  }
+  #venue-search {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: 1px solid black;
+  }
+  
+#venue-search:hover {
+    color: black;
+    
+  }
+  #location-search {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border: 1px solid black;
+  }
+  
+#location-search:hover {
+    color: black;
+    
+  }
 
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
