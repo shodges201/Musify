@@ -9,26 +9,26 @@ $(document).ready(function(){
     });
     //   $('.tap-target').tapTarget();
 
-    localStorage.clear();
     var numResults = "20";
     var searchTerm = "";
-    var state = "";
-    var city = "";
-    var zipCode = "";
-    var radius = "";
-    var artist = "";
-    var local = "";
+    var locationState = "";
+    var locationCity = "";
+    var artist= "";
     var venueName = "";
     var venueState = "";
     var expanded = false;
     var queryURL = "";
     var search = "";
-    var youtube = "";
-    var twitter = "";
-    var instagram = "";
-    var facebook = "";
-    var itunes = "";
+    var artistYoutube = "";
+    var artistTwitter = "";
+    var artistInstagram = "";
+    var artistFacebook = "";
+    var artistItunes = "";
     var displayingResults = false;
+    var venueName = "";
+    var venueId = "";
+    var venueImage= "";
+    var venueTwitter = "";
 
     $(window).keydown(function (event) {
         if (event.keyCode == 13) {
