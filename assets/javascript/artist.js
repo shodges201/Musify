@@ -21,7 +21,7 @@ $(document).ready(function () {
         $("#social-media-links").append(listItem);
     }
     if (localStorage.getItem("artistTwitter") !== "") {
-        var linkURL = localStorage.getItem("venueTwitter");
+        var linkURL = localStorage.getItem("artistTwitter");
         linkURL = linkURL.replace("https://twitter.com/", "")
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
