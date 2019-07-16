@@ -20,11 +20,11 @@
 }
 
 nav ul li:hover {
-    background-color: orange;
+    color: orange;
 }
 
 nav a:hover {
-    background-color: orange;
+    color: orange;
 }
 
 #locationIMG,
@@ -45,4 +45,8 @@ nav a:hover {
 
 .social-media-container{
     margin-top: 5px;
+}
+
+#artistIMG{
+    margin-top: 30%;
 }
