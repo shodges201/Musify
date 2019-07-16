@@ -1,18 +1,17 @@
-var pos = "";
 $(document).ready(function(){
+
     $('.parallax').parallax();
     $('.sidenav').sidenav();
     $('.carousel.carousel-slider').carousel({
         fullWidth: true,
         indicators: true
-      });
- //   $('.tap-target').tapTarget();
+
+    });
 
 var numResults = "20";
 var searchTerm = "";
 var state = "";
 var city = "";
-var zipCode = "";
 var radius = "";
 var artist= "";
 var local = "";
@@ -30,7 +29,8 @@ var artistInstagram = "";
 var artistFacebook = "";
 var artistItunes = "";
 var displayingResults = false;
-
+var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+var stateAbrev = ["AK","AL","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
 $(window).keydown(function(event){
     if(event.keyCode == 13) {
         event.preventDefault();
@@ -45,6 +45,13 @@ $(window).keydown(function(event){
                 $("#link-container").remove();
             }
             venueSearch();
+        }
+        else if(search === "location"){
+            if(displayingResults === true){
+                $("#link-container").remove();
+            }
+            logLocationData();
+            window.location.href = "assets/html/location.html"
         }
     }
 })
@@ -207,7 +214,7 @@ function venueDisplay(){
     var newCol = $("<form>").addClass("col s12");
     var smallerRow = $("<div>").addClass("row");
     var inputRow = $("<div>").addClass("input-field col s6");
-    var inputField = $("<input>").attr("type", "text").attr("id", "venueName").addClass("validate").attr("placeholder", "Name");
+    var inputField = $("<input>").attr("type", "text").attr("id", "venueName").addClass("validate").attr("placeholder", "Venue Name");
 
     inputRow.append(inputField);
     smallerRow.append(inputRow);
@@ -216,17 +223,19 @@ function venueDisplay(){
     inputSection.append(newRow);
 
     //State
-    newRow = $("<div>").addClass("row");
-    newCol = $("<form>").addClass("col s6");
-    smallerRow = $("<div>").addClass("row");
-    inputRow = $("<div>").addClass("input-field col s12");
-    inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
+    inputRow = $("<div>").addClass("input-field col s6");
+    //inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
+    var trigger = $("<select>").attr("id", "stateVal").append($('<option value="" disabled selected>State</option>'));
+    for(var i = 0; i < stateAbrev.length; i++){
+        var item = $("<option>").attr("value", i).text(stateAbrev[i]);
+        trigger.append(item);
+        console.log(stateAbrev[i]);
+    }
 
-    inputRow.append(inputField);
+    inputRow.append(trigger);
     smallerRow.append(inputRow);
-    newCol.append(smallerRow);
-    newRow.append(newCol);
-    inputSection.append(newRow);
+
+    $('select').formSelect();
 
     //button
     newRow = $("<div>").addClass("row");
@@ -260,7 +269,7 @@ $("#venue-search").on("click", function(){
 })
 function venueSearch(){
     var venue = $("#venueName").val().trim();
-    var state = $("#venueState").val().trim();
+    var state = stateAbrev[$("#stateVal").val()];
     queryURL = "https://app.ticketmaster.com/discovery/v2/venues.json?stateCode=" + state + "&keyword="+ venue +"&sort=relevance,desc&apikey=UpMLmiplG7uNV9Gbe2W1u5v6GFAFAAXd";
     //queries to find attraction/artist
     $.ajax({
@@ -321,7 +330,7 @@ function logVenueData(index){
 
 $(document).on("click", "#venueBtn", function(event){
     event.preventDefault();
-    if($("#venueName").val().trim() !== "" || $("#venueState").val().trim() !== ""){
+    if($("#venueName").val().trim() !== "" || $("#stateVal").val() !== null){
         if(displayingResults === true){
             $("#link-container").remove();
         }
@@ -349,12 +358,20 @@ function locationDisplay(){
      newRow.append(newCol);
      inputSection.append(newRow);
 
-     //State
-     inputRow = $("<div>").addClass("input-field col s3");
-     inputField = $("<input>").attr("type", "text").attr("id", "locationState").addClass("validate").attr("placeholder", "State");
- 
-     inputRow.append(inputField);
-     smallerRow.append(inputRow);
+    //State
+    inputRow = $("<div>").addClass("input-field col s6");
+    //inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
+    var trigger = $("<select>").attr("id", "stateVal").append($('<option value="" disabled selected>State</option>'));
+    for(var i = 0; i < stateAbrev.length; i++){
+        var item = $("<option>").attr("value", i).text(stateAbrev[i]);
+        trigger.append(item);
+        console.log(stateAbrev[i]);
+    }
+
+    inputRow.append(trigger);
+    smallerRow.append(inputRow);
+
+    $('select').formSelect();
 
     
      newRow = $("<div>").addClass("row");
@@ -395,10 +412,15 @@ $(document).on("click", "#locationBtn", function(event){
 })
 
 function logLocationData(){
-    state = $("#locationState").val().trim();
+    state = stateAbrev[$("#stateVal").val()];
     localStorage.setItem("locationState", state);
     city = $("#locationCity").val().trim();
     localStorage.setItem("locationCity", city);
-}   
+}
+$(".dropdown-trigger").dropdown();
 
+$(document).on("click", ".dropdown-trigger", function(){
+    setTimeout(1500, null);
+    $(this).css("color", "black");
+})
 });
