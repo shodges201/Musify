@@ -3,18 +3,16 @@
 <!-- Head  -->
 
 <head>
-
     <title>Musify: Location</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <link rel="stylesheet" type="text/css" href="../css/artist.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/2b0c469069.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/artist.css">
 
 </head>
 
@@ -22,7 +20,7 @@
 
 <body>
 
-    <nav class="black" role="navigation" id="navBar">
+    <nav class="black" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="../../index.html" class="brand-logo">Musify</a>
             <ul class="right hide-on-med-and-down">
@@ -30,67 +28,81 @@
                 <li><a href="#"><i class="fas fa-map-marked"></i></a></li>
                 <li><a href="../html/Venue.html"><i class="fas fa-warehouse"></i></a></li>
             </ul>
-        </div>
-        <!-- Mobile Nav -->
 
-        <ul id="nav-mobile" class="sidenav">
-            <li><a href="#">Venue</a></li>
-        </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">Menu</i></a>
+            <ul id="nav-mobile" class="sidenav">
+                <li><a href="#">Venue</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">Menu</i></a>
         </div>
     </nav>
 
     <!--  -->
-    <div class="row">
-
+    <div class="row" id="show-row">
         <div class="col s3">
-            <div class="card">
-                <div class="card-image">
-                    <img src="../images/placeholder.png">
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../images/placeholder.png" id="location-image">
+
+                    </div>
+                    <div class="card-content">
+                        <h4 id="location-name">Artist Name</h4>
+                    </div>
 
                 </div>
-                <div class="card-content">
-                    <h4>Artist Name</h4>
+            </div>
+            <div class="row">
+
+                <div class="card blue-grey darken-1" id="links">
+                    <div class="card-content white-text">
+                        <ul id="social-media-links">
+                        </ul>
+                    </div>
+
                 </div>
-                <div class="card-action">
-                    <p> Artist Info: I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
-                </div>
+
             </div>
         </div>
+
         <!-- Shows -->
-        <div class="col s6">
-            <!-- <div class="card blue-grey darken-1 large" >
+        <div class="row">
+            <div class="col s9">
+                <!-- <div class="card blue-grey darken-1 large" >
                 <div class="card-content white-text"> -->
-            <div id="shows-container">
-                <span class="card-title">Shows</span>
+                <div id="shows">
+                    <span class="card-title">Shows</span>
 
-                <p></p>
-            </div>
+                    <table class="highlight responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Venue</th>
+                                <th>City</th>
+                                <th>State/Prov</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
 
-            <!-- </div>
+                        <tbody id="shows-container"></tbody>
+                    </table>
+
+                    <!-- <p></p> -->
+                </div>
+
+                <!-- </div>
             </div> -->
+            </div>
         </div>
         <!-- Links -->
-        <div class="col s3">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <ul>
-                        <li>Spotify</li>
-                        <li>YouTube</li>
-                        <li>Facebook</li>
-                        <li>Instagram</li>
-                        <li>Twitter</li>
-                    </ul>
-                </div>
 
-            </div>
-        </div>
     </div>
-
-    <!-- JQuery link -->
-
+  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/2b0c469069.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
     <!-- Javascript Link -->
     <script src="../javascript/location.js"></script>
 
