@@ -7,46 +7,6 @@ $(document).ready(function(){
         indicators: true
 
     });
-    //   $('.tap-target').tapTarget();
-
-    var numResults = "20";
-    var searchTerm = "";
-    var locationState = "";
-    var locationCity = "";
-    var artist= "";
-    var venueName = "";
-    var venueState = "";
-    var expanded = false;
-    var queryURL = "";
-    var search = "";
-    var artistYoutube = "";
-    var artistTwitter = "";
-    var artistInstagram = "";
-    var artistFacebook = "";
-    var artistItunes = "";
-    var displayingResults = false;
-    var venueName = "";
-    var venueId = "";
-    var venueImage= "";
-    var venueTwitter = "";
-
-    $(window).keydown(function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-            if (search === "artist") {
-                if (displayingResults === true) {
-                    $("#link-container").remove();
-                }
-                artistSearch();
-            } else if (search === "venue") {
-                if (displayingResults === true) {
-                    $("#link-container").remove();
-                }
-                venueSearch();
-            }
-        }
-      });
- //   $('.tap-target').tapTarget();
 
 var numResults = "20";
 var searchTerm = "";
