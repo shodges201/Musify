@@ -91,4 +91,18 @@ $(document).ready(function(){
     $(document).on("click", ".show", function(){
         window.open($(this).attr("show-link"));
     })
+
+    $("#location-btn").on("click", function(event){
+        if(localStorage.getItem("gps") == null){
+            event.preventDefault();
+            M.toast({html: 'Return to the home page to search for a location first!'})
+        }
+    })
+
+    $("#venue-btn").on("click", function(event){
+        if(localStorage.getItem("venueId") == null || localStorage.getItem("venueId") == ""){
+            event.preventDefault();
+            M.toast({html: 'Return to the home page to search for a venue first!'})
+        }
+    })
 })
