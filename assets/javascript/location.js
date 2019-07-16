@@ -18,7 +18,16 @@ $(document).ready(function(){
         $("#shows-container").empty();
         for(var i = 0; i < response._embedded.events.length; i++){
             var startDate = response._embedded.events[i].dates.start.localDate;
+            if(startDate != undefined){
+                console.log(formatDate(startDate));
+                startDate = formatDate(startDate);
+            }
             var startTime = response._embedded.events[i].dates.start.localTime;
+            if(startTime != undefined){
+                console.log(startTime);
+                console.log(formatTime(startTime));
+                startTime = formatTime(startTime);
+            }
             var eventName = response._embedded.events[i].name;
             var venueName = response._embedded.events[i]._embedded.venues[0].name;
             var city = response._embedded.events[i]._embedded.venues[0].city.name;
@@ -42,7 +51,9 @@ $(document).ready(function(){
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
-                     .append($("<td>").append(country)));
+                     .append($("<td>").append(country))
+                     .append($("<td>").append(startDate))
+                     .append($("<td>").append(startTime)));
             }
             
         }
@@ -67,4 +78,29 @@ $(document).ready(function(){
             M.toast({html: 'Return to the home page to search for a venue first!'})
         }
     })
+
+    function formatDate(date){
+        date = date.split("-");
+        var str = "";
+        str = date[1] + "/" + date[2] + "/" + date[0];
+        return str;
+    }
+
+    function formatTime(startTime){
+        startTime = startTime.split(":");
+        var str = "";
+        if(parseInt(startTime[0]) > 12){
+            str = (parseInt(startTime[0]) - 12) + ":" + startTime[1] + " pm";
+        }
+        else if(parseInt(startTime[0]) == 12){
+            str = startTime[0] + ":" + startTime[1] + " pm";
+        }
+        else if(parseInt(startTime[0]) == 24){
+            str = startTime[0] + ":" + startTime[1] + " am";
+        }
+        else{
+            str = startTime[0] + ":" + startTime[1] + " am";
+        }
+        return str;
+    }
 })
