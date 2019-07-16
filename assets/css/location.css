@@ -5,3 +5,11 @@
     overflow: scroll;
     border: 1px solid #ccc;
 }
+
+nav ul li:hover {
+    background-color: orange;
+ }
+
+ nav a:hover {
+    background-color: orange;
+ }

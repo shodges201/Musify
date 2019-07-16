@@ -110,7 +110,7 @@ function artistDisplay(){
 
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s1");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
+    var btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").text("Search").attr("id", "artistBtn").attr("href", "assets/html/artist.html");
 
 
     newCol.append(btn);
@@ -272,7 +272,7 @@ function venueDisplay(){
     //button
     newRow = $("<div>").addClass("row");
     newCol = $("<form>").addClass("col s1");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "venueBtn").attr("href", "assets/html/venue.html");
+    var btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").text("Search").attr("id", "venueBtn").attr("href", "assets/html/venue.html");
 
 
     newCol.append(btn);
@@ -411,7 +411,7 @@ function locationDisplay(){
     
      newRow = $("<div>").addClass("row");
      newCol = $("<form>").addClass("col s1");
-     btn = $("<a>").addClass("waves-effect waves-light btn").text("Search").attr("id", "locationBtn").attr("href", "assets/html/location.html");
+     btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").text("Search").attr("id", "locationBtn").attr("href", "assets/html/location.html");
  
      newCol.append(btn);
      newRow.append(newCol);

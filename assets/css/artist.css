@@ -18,3 +18,11 @@
 .show{
     cursor: pointer;
 }
+
+nav ul li:hover {
+    background-color: orange;
+ }
+
+ nav a:hover {
+    background-color: orange;
+ }
