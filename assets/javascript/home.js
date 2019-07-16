@@ -36,6 +36,28 @@ $(document).ready(function(){
 
     });
 
+    $("#artist-btn").on("click", function(event){
+        if(localStorage.getItem("artistID") == null || localStorage.getItem("artistID") === ""){
+            event.preventDefault();
+            M.toast({html: 'Search for an artist first!'})
+        }
+    })
+
+    $("#location-btn").on("click", function(event){
+        if(localStorage.getItem("gps") == null){
+            event.preventDefault();
+            M.toast({html: 'Search for a location first!'})
+        }
+    })
+
+    $("#venue-btn").on("click", function(event){
+        if(localStorage.getItem("venueId") == null || localStorage.getItem("venueId") == ""){
+            event.preventDefault();
+            M.toast({html: 'Search for a venue first!'})
+        }
+    })
+    
+
 //full state names not currently used
 var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 //state abreviations used for populating dropdown selectors
@@ -370,7 +392,6 @@ function locationDisplay(){
 
     //State
     inputRow = $("<div>").addClass("input-field col s3");
-    //inputField = $("<input>").attr("type", "text").attr("id", "venueState").addClass("validate").attr("placeholder", "State");
     var trigger = $("<select>").attr("id", "stateVal").append($('<option value="" disabled selected>State</option>'));
     for(var i = 0; i < stateAbrev.length; i++){
         var item = $("<option>").attr("value", i).text(stateAbrev[i]);
@@ -384,7 +405,7 @@ function locationDisplay(){
     $('select').formSelect();
 
     inputRow = $("<div>").addClass("input-field col s3");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("location").attr("id", "getLoc");
+    var btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").attr("id", "getLoc").append($('<i class="fas fa-location-arrow" id="arrowImg"></i>'));
     inputRow.append(btn);
     smallerRow.append(inputRow);
     
@@ -453,8 +474,6 @@ function logGPS(hash){
 }
 
 ///////// END LOCATION SEARCH SECTION ///////////////
-
-$(".dropdown-trigger").dropdown();
 
 //changes color of text on dropdown to black after user selects it
 $(document).on("click", ".dropdown-trigger", function(){
