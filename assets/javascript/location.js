@@ -27,7 +27,7 @@ $(document).ready(function(){
             if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
                 var state = response._embedded.events[i]._embedded.venues[0].state.name;
                 // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                $("#shows-container").append($("<tr>")
+                $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
                      .append($("<td>").append(eventName))
                      .append($("<td>").append(venueName))
                      .append($("<td>").append(city))
