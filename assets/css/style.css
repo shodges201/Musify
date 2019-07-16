@@ -1,6 +1,11 @@
 #navBar{
     height: 70px;
 }
+/* #arrowImg{
+    text-align: center;
+    height: 50px;
+    width: 50px;
+} */
 
 .parallax {
     position: static;

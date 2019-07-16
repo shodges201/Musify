@@ -384,7 +384,7 @@ function locationDisplay(){
     $('select').formSelect();
 
     inputRow = $("<div>").addClass("input-field col s3");
-    var btn = $("<a>").addClass("waves-effect waves-light btn").text("location").attr("id", "getLoc");
+    var btn = $("<a>").addClass("waves-effect waves-light btn-large orange darken-3").attr("id", "getLoc").append($('<i class="fas fa-location-arrow" id="arrowImg"></i>'));
     inputRow.append(btn);
     smallerRow.append(inputRow);
     
