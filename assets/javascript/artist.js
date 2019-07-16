@@ -9,7 +9,7 @@ $(document).ready(function(){
     $("#artist-name").text(artistName);
     $("#artist-image").attr("src", imageURL);
     if(localStorage.getItem("itunes") !== ""){
-        var linkURL = localStorage.getItem("itunes");
+        var linkURL = localStorage.getItem("artistItunes");
         var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
