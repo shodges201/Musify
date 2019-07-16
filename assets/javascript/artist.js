@@ -2,24 +2,23 @@ var artist = "";
 var queryURL = "";
 var json = "";
 $(document).ready(function(){
+    
     var artistID = localStorage.getItem("artistID");
     var artistName = localStorage.getItem("artistName");
     var imageURL = localStorage.getItem("imageURL");
     var numEvents = localStorage.getItem("upcomingEvents");
     $("#artist-name").text(artistName);
     $("#artist-image").attr("src", imageURL);
-    if (localStorage.getItem("artistItunes") !== "") {
-        var linkURL = localStorage.getItem("artistItunes");
-        var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+
+    if (localStorage.getItem("artistFacebook") !== "") {
+        var linkURL = localStorage.getItem("artistFacebook");
+        //var link = $("<a>").attr("href", linkURL).text("Facebook").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+        // facebook sdk
+        var link = $("<div>").addClass("fb-like").attr("data-href", linkURL).attr("data-width", "250px").attr("data-layout", "standard").attr("data-action", "like").attr("data-size", "large").attr("data-show-faces", "true").attr("data-share", "true");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if(localStorage.getItem("artistInstagram") !== "") {
-        var linkURL = localStorage.getItem("artistInstagram");
-        var link = $("<a>").attr("href", linkURL).text("Instagram").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
-        var listItem = $("<li>").append(link);
-        $("#social-media-links").append(listItem);
-    }
+
     if(localStorage.getItem("artistTwitter") !== "") {
         var linkURL = localStorage.getItem("artistTwitter");
         linkURL = linkURL.replace("https://twitter.com/", "")
@@ -32,6 +31,20 @@ $(document).ready(function(){
             }
         );
     }
+
+    if (localStorage.getItem("artistItunes") !== "") {
+        var linkURL = localStorage.getItem("artistItunes");
+        var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+        var listItem = $("<li>").append(link);
+        $("#social-media-links").append(listItem);
+    }
+    if(localStorage.getItem("artistInstagram") !== "") {
+        var linkURL = localStorage.getItem("artistInstagram");
+        var link = $("<a>").attr("href", linkURL).text("Instagram").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+        var listItem = $("<li>").append(link);
+        $("#social-media-links").append(listItem);
+    }
+
     if (localStorage.getItem("artistYoutube") !== "") {
         var linkURL = localStorage.getItem("artistYoutube");
         var listItem = $("<li>");
@@ -46,12 +59,8 @@ $(document).ready(function(){
         listItem.append(link);
         $("#social-media-links").append(listItem);
     }
-    if (localStorage.getItem("artistFacebook") !== "") {
-        var linkURL = localStorage.getItem("artistFacebook");
-        var link = $("<a>").attr("href", linkURL).text("Facebook").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
-        var listItem = $("<li>").append(link);
-        $("#social-media-links").append(listItem);
-    }
+
+
     //only query API if artist has upcoming events
     if (numEvents > 0) {
         queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?attractionId=" + artistID + "&sort=date,asc&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
