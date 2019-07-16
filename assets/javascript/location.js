@@ -25,12 +25,23 @@ $(document).ready(function(){
             var country = response._embedded.events[i]._embedded.venues[0].country.name;
             if(response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA"){
                 var state = response._embedded.events[i]._embedded.venues[0].state.name;
-                var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                $("#shows-container").append(text);
+                // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
+                $("#shows-container").append($("<tr>")
+                     .append($("<td>").append(eventName))
+                     .append($("<td>").append(venueName))
+                     .append($("<td>").append(city))
+                    // .append($("<td>").append(state))
+                     .append($("<td>").append(country)));
             }
+            
             else{
-                var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
-                $("#shows-container").append(text);
+                // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
+                // $("#shows-container").append(text);
+                $("#shows-container").append($("<tr>")
+                     .append($("<td>").append(eventName))
+                     .append($("<td>").append(venueName))
+                     .append($("<td>").append(city))
+                     .append($("<td>").append(country)));
             }
             
         }
