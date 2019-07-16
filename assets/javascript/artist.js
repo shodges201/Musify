@@ -8,19 +8,19 @@ $(document).ready(function(){
     var numEvents = localStorage.getItem("upcomingEvents");
     $("#artist-name").text(artistName);
     $("#artist-image").attr("src", imageURL);
-    if (localStorage.getItem("itunes") !== "") {
+    if (localStorage.getItem("artistItunes") !== "") {
         var linkURL = localStorage.getItem("artistItunes");
         var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if (localStorage.getItem("artistInstagram") !== "") {
+    if(localStorage.getItem("artistInstagram") !== "") {
         var linkURL = localStorage.getItem("artistInstagram");
         var link = $("<a>").attr("href", linkURL).text("Instagram").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link);
         $("#social-media-links").append(listItem);
     }
-    if (localStorage.getItem("artistTwitter") !== "") {
+    if(localStorage.getItem("artistTwitter") !== "") {
         var linkURL = localStorage.getItem("artistTwitter");
         linkURL = linkURL.replace("https://twitter.com/", "")
         var twitterItem = $("<li>").attr("id", "twitter-button");
