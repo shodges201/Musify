@@ -42,11 +42,11 @@ body {
     bottom: 120px;
 } */
 
-#cardIMG1,
+/* #cardIMG1,
 #cardIMG2,
 #cardIMG3 {
     height: 250px;
-}
+} */
 
 .parallax {
     position: static;
@@ -227,5 +227,5 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }

@@ -32,6 +32,7 @@ $(document).ready(function () {
 
     $('.parallax').parallax();
     $('.sidenav').sidenav();
+    $('.slider').slider();
     $('.carousel.carousel-slider').carousel({
         fullWidth: true,
         indicators: true
