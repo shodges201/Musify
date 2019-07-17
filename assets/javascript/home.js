@@ -460,10 +460,9 @@ $(document).ready(function () {
     })
 
     $(document).on("click", "#locationBtn", function (event) {
-        if($("#locationCity").val() != "" && $("#stateVal").val() != undefined){
+        if ($("#locationCity").val() != "" && $("#stateVal").val() != undefined) {
             logLocationData();
-        }
-        else{
+        } else {
             M.toast({
                 html: 'Unable to process request. Please enter a city name and select a state, or use the arrow button for GPS location.'
             })

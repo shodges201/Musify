@@ -49,6 +49,24 @@ footer.page-footer {
     color: lightgrey;
 }
 
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: orange !important;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus+label,
+.materialize-textarea:focus:not([readonly])+label {
+    color: orange !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus,
+.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid orange !important;
+    box-shadow: 0 1px 0 0 orange !important;
+}
+
 nav ul li:hover {
     color: orange;
 }
@@ -133,8 +151,8 @@ nav a:hover {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
