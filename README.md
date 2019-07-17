@@ -65,4 +65,55 @@ Navigational Components: search field, slider, tags, icons.
 =================================================================================
 
 <!-- Programming Languages  --> (Back-End)
-Project Musify was made dynamic with diffrent programming languages such as Javascript, JSON, AJAX. 
+Project Musify was executed with the following programming languages:
+JAVASCRIPT, JSON, AJAX, JQUERY. 
+
+JavaJavaScript (JS):
+
+ Is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages. 
+
+```js
+var questions = [{
+   else if(search === "location"){
+            if(displayingResults === true){
+                $("#link-container").remove();
+            }
+},{
+```
+AJAX: 
+
+AJAX = Asynchronous JavaScript and XML. 
+Ajax is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send and retrieve data from a server asynchronously without interfering with the display and behavior of the existing page.
+
+```$.ajax
+$.ajax({
+        url: queryURL,
+        method: "GET"
+
+jQuery:
+
+jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
+
+```js
+$("#link-container").remove();
+```
+<!-- Application Programming Interface --> (API)
+
+An application programming interface is a set of subroutine definitions, communication protocols, and tools for building software, set of clearly defined methods of communication among various components. 
+
+To acheive and deliver Project Musify for final production, these API's were used. 
+
+
+```js
+TICKETMASTER API
+
+(queryURL = "https://app.ticketmaster.com/discovery/v2/venues.json?stateCode=" + state + "&keyword="+ venue +"&sort=relevance,desc&apikey=UpMLmiplG7uNV9Gbe2W1u5v6GFAFAAXd";)
+
+GEOLOCATION API
+
+ (locationURL = "https://app.ticketmaster.com/discovery/v2/events.json?sort=relevance,desc&stateCode=" + locationState +"&city=" + locationCity + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";)
+ ```
+
+
+ <!-- CHALLENGES -->
+ 
