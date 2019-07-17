@@ -1,9 +1,60 @@
-#navBar {
+/* #navBar {
     height: 70px;
+} */
+
+body {
+    font-family: 'Audiowide';font-size: 22px;
+}
+
+#footer1,
+#footer2
+{
+    font-size: 16px;
+}
+
+#artistBtn {
+    left: 47%;
+    position: absolute;
+}
+
+#locationBtn {
+    left: 47%;
+    position: absolute;
+    bottom: -63px;
+}
+
+#venueBtn {
+    left: 47%;
+    position: absolute;
+    bottom: -63px;
+}
+
+#artistName {
+    left: 50%;
+    position: absolute;
+}
+
+/* #card1,
+#card2,
+#card3
+{
+    position: relative;
+    bottom: 120px;
+} */
+
+#cardIMG1,
+#cardIMG2,
+#cardIMG3 {
+    height: 250px;
 }
 
 .parallax {
     position: static;
+    height: 40%;
+}
+
+.nameColor {
+    color: black;
 }
 
 nav ul a,
@@ -13,6 +64,14 @@ nav .brand-logo {
 
 p {
     line-height: 2rem;
+}
+
+#middleSection {
+    height: 450px;
+}
+
+#middleSection1 {
+    height: auto;
 }
 
 .sidenav-trigger {
@@ -25,6 +84,15 @@ p {
     height: auto;
     color: rgba(255, 255, 255, .9);
     width: 100%;
+}
+
+#index-banner {
+    height: 500px;
+    top: -20px;
+}
+
+#index-banner2 {
+    height: 500px;
 }
 
 .parallax-container .section {
@@ -66,6 +134,11 @@ footer.page-footer {
     border-bottom: 1px solid orange !important;
     box-shadow: 0 1px 0 0 orange !important;
 }
+
+/* input::-webkit-input-placeholder {
+    color: black !important;
+} */
+
 
 nav ul li:hover {
     color: orange;
@@ -134,7 +207,7 @@ nav a:hover {
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
         position: absolute;
-        background-color: brown;
+        background-color: orange;
 
     }
 
@@ -145,7 +218,7 @@ nav a:hover {
 @media only screen and (max-width : 600px) {
     .parallax-container .section {
         position: absolute;
-        background-color: aqua;
+        background-color: orange;
 
     }
 }

@@ -13,8 +13,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link rel="stylesheet" text="text/css" href="assets/css/style.css">
-    <title>Musify Landing Page</title>
 
 </head>
 
@@ -50,29 +50,57 @@
             </div>
         </div>
         <div class="parallax">
-            <img src="assets/Images/Concert.jpg" alt="" id="imgConcert"></div>
+            <img src="assets/Images/PostMalone.jpg" alt="" id="imgConcert"></div>
     </div>
 
     <!-- Middle Section -->
 
-    <div class="container" id="middleColor">
-        <div class="section" id="middleSection">
-            <div class="row" id="buttonsSections">
-                <div class="col s4">
-                    <a class="waves-effect waves-light btn-large orange darken-3" id="artist-search">Artist <i
-                            class="fas fa-headphones"></i></a>
+
+    <div class="section white" id="middleSection">
+        <div class="row container center-align" id="buttonsSections">
+
+            <div class="col s4">
+                <div class="card" id="card1">
+                    <div class="card-image">
+                        <img src="assets/Images/PostMalone.jpg" id="cardIMG1">
+                        <span class="card-title">
+                            <a class="waves-effect waves-light btn-large orange darken-3" id="artist-search">Artist
+                                <i class="fas fa-headphones">
+                                </i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
-                <div class="col s3 offset-s1">
-                    <a class="waves-effect waves-light btn-large orange darken-3" id="location-search">Location <i
-                            class="fas fa-map-marked"></i></a>
+            </div>
+            <div class="col s4">
+                <div class="card" id="card2">
+                    <div class="card-image">
+                        <img src="assets/Images/location.jpg" id="cardIMG2">
+                        <span class="card-title">
+                            <a class="waves-effect waves-light btn-large orange darken-3" id="location-search">Location
+                                <i class="fas fa-map-marked">
+                                </i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
-                <div class="col s2 offset-s2">
-                    <a class="waves-effect waves-light btn-large orange darken-3" id="venue-search">Venue <i
-                            class="fas fa-warehouse"></i></a>
+            </div>
+            <div class="col s4">
+                <div class="card" id="card3">
+                    <div class="card-image">
+                        <img src="assets/Images/venue.jpg" id="cardIMG3">
+                        <span class="card-title">
+                            <a class="waves-effect waves-light btn-large orange darken-3" id="venue-search">Venue
+                                <i class="fas fa-warehouse">
+                                </i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Parallax IMG 2 -->
 
@@ -83,13 +111,16 @@
                 </div>
             </div>
         </div>
-        <div class="parallax"><img src="assets/Images/PostMalone.jpg" alt=""></div>
+        <div class="parallax" id="index-banner2"><img src="assets/Images/Concert.jpg" alt=""></div>
     </div>
-    <footer class="page-footer black">
+
+    <!-- Footer -->
+
+    <footer class="page-footer black" id="footer1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Team Bio</h5>
+                    <h5 class="white-text">Bio</h5>
                     <p class="grey-text text-lighten-4">We are a group of new coders from Rutgers Coding Bootcamp, and
                         this is our first project.
                         Creators: Scott, Jon, Sheriff, and Quinton.
@@ -101,26 +132,32 @@
                 <div class="col l3 s12">
                     <h5 class="white-text">Pages</h5>
                     <ul>
-                        <li><a class="white-text" href="#!">Artist</a></li>
-                        <li><a class="white-text" href="#!">Location</a></li>
-                        <li><a class="white-text" href="#!">Venue</a></li>
+                        <li><a class="white-text" href="assets/html/artist.html">Artist</a></li>
+                        <li><a class="white-text" href="assets/html/location.html">Location</a></li>
+                        <li><a class="white-text" href="assets/html/Venue.html">Venue</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s12">
                     <h5 class="white-text">Connect</h5>
                     <ul>
                         <li><a class="white-text" href="assets/html/about.html">About</a></li>
-                        <li><a class="white-text" href="https://twitter.com/">Twitter</a><i
-                                class="fab fa-twitter-square"></i></li>
-                        <li><a class="white-text"
+                        <li><a class="white-text" href="https://twitter.com/">
+                                <i class="fab fa-twitter-square">
+                                </i>Twitter
+                            </a>
+                        </li>
+                        <li>
+                            <a class="white-text"
                                 href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&&gclid=Cj0KCQjwyLDpBRCxARIsAEENsrL6xXFv0H1sU3pdz-GerVKVA7E0l_6GjjHHRJMJMzxOunSjU2pbdrIaAj1LEALw_wcB&gclsrc=aw.ds">Ticket
-                                Master</a></li>
+                                Master
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="footer-copyright">
+        <div class="footer-copyright" id="footer2">
             <div class="container">
                 Made with <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
             </div>
