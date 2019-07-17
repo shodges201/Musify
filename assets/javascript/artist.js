@@ -34,7 +34,7 @@ $(document).ready(function(){
 
     if (localStorage.getItem("artistItunes") !== "") {
         var linkURL = localStorage.getItem("artistItunes");
-        var link = $("<a>").attr("href", linkURL).text("itunes").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
+        var link = $("<a>").attr("href", linkURL).text("Apple Music").attr("target", "_blank").addClass("social-media").attr("rel", "noopener noreferrer");
         var listItem = $("<li>").append(link).addClass("social-media-container");
         $("#social-media-links").append(listItem);
     }
