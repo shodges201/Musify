@@ -1,9 +1,14 @@
-
-
 body {
-    font-family: 'Audiowide';font-size: 22px;
+    font-family: 'Audiowide';
+    font-size: 22px;
 }
-#table1{
+
+#footer1,
+#footer2 {
+    font-size: 16px;
+}
+
+#table1 {
     font-size: 16px;
 }
 
