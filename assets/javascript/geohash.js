@@ -27,16 +27,32 @@
 
   var BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz";
   var NEIGHBORS = {
-    right: { even:  "bc01fg45238967deuvhjyznpkmstqrwx" },
-    left: { even:  "238967debc01fg45kmstqrwxuvhjyznp" },
-    top: { even:  "p0r21436x8zb9dcf5h7kjnmqesgutwvy" },
-    bottom: { even:  "14365h7k9dcfesgujnmqp0r2twvyx8zb" }
+    right: {
+      even: "bc01fg45238967deuvhjyznpkmstqrwx"
+    },
+    left: {
+      even: "238967debc01fg45kmstqrwxuvhjyznp"
+    },
+    top: {
+      even: "p0r21436x8zb9dcf5h7kjnmqesgutwvy"
+    },
+    bottom: {
+      even: "14365h7k9dcfesgujnmqp0r2twvyx8zb"
+    }
   };
   var BORDERS = {
-    right: { even : "bcfguvyz" },
-    left: { even : "0145hjnp" },
-    top: { even : "prxz" },
-    bottom: { even : "028b" }
+    right: {
+      even: "bcfguvyz"
+    },
+    left: {
+      even: "0145hjnp"
+    },
+    top: {
+      even: "prxz"
+    },
+    bottom: {
+      even: "028b"
+    }
   };
 
   NEIGHBORS.bottom.odd = NEIGHBORS.left.even;
@@ -59,9 +75,9 @@
 
   var calculateAdjacent = function (srcHash, dir) {
     srcHash = srcHash.toLowerCase();
-    var lastChr = srcHash.charAt(srcHash.length-1);
+    var lastChr = srcHash.charAt(srcHash.length - 1);
     var type = (srcHash.length % 2) ? 'odd' : 'even';
-    var base = srcHash.substring(0,srcHash.length-1);
+    var base = srcHash.substring(0, srcHash.length - 1);
     if (BORDERS[dir][type].indexOf(lastChr) !== -1) {
       base = calculateAdjacent(base, dir);
     }
@@ -133,7 +149,10 @@
     lat[2] = (lat[0] + lat[1]) / 2;
     lon[2] = (lon[0] + lon[1]) / 2;
 
-    return { latitude: lat, longitude: lon};
+    return {
+      latitude: lat,
+      longitude: lon
+    };
   };
 
   return {
