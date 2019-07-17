@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <!-- Head  -->
 
 <head>
+
+    <!-- Title -->
+
     <title>Musify: Artist</title>
+
+    <!-- meta -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- links -->
+
     <link rel="stylesheet" type="text/css" href="../css/artist.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/2b0c469069.js"></script>
 
@@ -23,60 +31,73 @@
 
 <body>
 
+    <!-- FB -->
+
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3">
+    </script>
+
+    <!-- Nav -->
 
     <nav class="black" role="navigation" id="navBar">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="../../index.html" class="brand-logo">Musify</a>
+            <a id="logo-container" href="../../index.html" class="brand-logo center hoverable">Musify</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#"><i class="fas fa-headphones"></i></a></li>
                 <li><a href="../html/location.html" id="location-btn"><i class="fas fa-map-marked"></i></a></li>
                 <li><a href="../html/Venue.html" id="venue-btn"><i class="fas fa-warehouse"></i></a></li>
             </ul>
         </div>
+
         <!-- Mobile Nav -->
 
         <ul id="nav-mobile" class="sidenav">
-            <li><a href="#">Venue</a></li>
+            <li>
+                <a href="#">Venue
+                </a>
+            </li>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">Menu</i></a>
         </div>
     </nav>
 
-    <!--  -->
+    <!-- Artist IMG -->
+
     <div class="row" id="show-row">
         <div class="col s3">
             <div class="row">
-                <div class="card" id="artistIMG">
+                <div class="card orange darken-3" id="artistIMG">
                     <div class="card-image">
                         <img src="../images/placeholder.png" id="artist-image">
-
                     </div>
                     <div class="card-content">
                         <h4 id="artist-name">Artist Name</h4>
                     </div>
-
                 </div>
             </div>
-            <div class="row">
 
-                <div class="card white darken-1" id="links">
+            <!-- Link Card -->
+
+            <div class="row">
+                <div class="card orange darken-3 center-align" id="links">
                     <div class="card-content">
                         <ul id="social-media-links">
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- Shows -->
+
         <div class="row">
             <div class="col s9">
-
                 <div id="shows">
-                    <span class="card-title"><h1>Shows</h1></span>
+                    <span class="card-title center-align">
+                        <h1>Shows</h1>
+                    </span>
+
+                    <!-- Table -->
 
                     <table class="highlight responsive-table">
                         <thead>
@@ -90,44 +111,73 @@
                                 <th>Time</th>
                             </tr>
                         </thead>
-
                         <tbody id="shows-container"></tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Footer -->
 
+    <footer class="page-footer black" id="footer1">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a group of new coders from Rutgers Coding Bootcamp, and
+                        this is our first project.
+                        Creators: Scott, Jon, Sheriff, and Quinton.
+                    </p>
                 </div>
 
-
+                <div class="col l3 s12">
+                    <h5 class="white-text">Pages</h5>
+                    <ul>
+                        <li><a class="white-text" href="assets/html/artist.html">Artist</a></li>
+                        <li><a class="white-text" href="assets/html/location.html">Location</a></li>
+                        <li><a class="white-text" href="assets/html/Venue.html">Venue</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="assets/html/about.html">About</a></li>
+                        <li><a class="white-text" href="https://twitter.com/">
+                                <i class="fab fa-twitter-square">
+                                </i>Twitter
+                            </a>
+                        </li>
+                        <li>
+                            <a class="white-text"
+                                href="https://www.ticketmaster.com/?landing=c&awtrc=true&c=SEM_TMBRAND_ggl_298560299_24300724499_ticketmaster&GCID=0&&gclid=Cj0KCQjwyLDpBRCxARIsAEENsrL6xXFv0H1sU3pdz-GerVKVA7E0l_6GjjHHRJMJMzxOunSjU2pbdrIaAj1LEALw_wcB&gclsrc=aw.ds">Ticket
+                                Master
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
+        <!-- Sub Footer -->
 
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <div class="footer-copyright" id="footer2">
+            <div class="container">
+                Made with <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- JQuery link -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://kit.fontawesome.com/2b0c469069.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://apis.google.com/js/platform.js"></script>
+
     <!-- Javascript Link -->
+
     <script src="../javascript/artist.js"></script>
 
 </body>

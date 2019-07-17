@@ -7,9 +7,9 @@ $(document).ready(function () {
     $("#venue-image").attr("src", venueImage);
     var venueURL = "https://app.ticketmaster.com/discovery/v2/events.json?venueId=" + venueId + "&classificationName=music&apikey=7P9kCFVoWDXeg9UD7nNXS5F0UouZEaxG";
     $("#venue-name").text(venueName);
-    if(localStorage.getItem("venueTwitter") !== ""){
+    if (localStorage.getItem("venueTwitter") !== "") {
         var linkURL = localStorage.getItem("venueTwitter");
-        linkURL = linkURL.replace("@","")
+        linkURL = linkURL.replace("@", "")
 
         var twitterItem = $("<li>").attr("id", "twitter-button");
         $("#social-media-links").append(twitterItem);
@@ -23,18 +23,18 @@ $(document).ready(function () {
     $.ajax({
         url: venueURL,
         method: "GET",
-        success: function(response){
+        success: function (response) {
             json = response;
             $("#shows-container").empty();
 
             for (var i = 0; i < response._embedded.events.length; i++) {
                 var startDate = response._embedded.events[i].dates.start.localDate;
-                if(startDate != undefined){
+                if (startDate != undefined) {
                     console.log(formatDate(startDate));
                     startDate = formatDate(startDate);
                 }
                 var startTime = response._embedded.events[i].dates.start.localTime;
-                if(startTime != undefined){
+                if (startTime != undefined) {
                     console.log(startTime);
                     console.log(formatTime(startTime));
                     startTime = formatTime(startTime);
@@ -47,72 +47,72 @@ $(document).ready(function () {
                 if (response._embedded.events[i]._embedded.venues[0].country.countryCode === "US" || response._embedded.events[i]._embedded.venues[0].country.countryCode === "CA") {
                     var state = response._embedded.events[i]._embedded.venues[0].state.name;
                     // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + state + ", " + country);
-                    $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                    .append($("<td>").append(eventName))
-                    .append($("<td>").append(venueName))
-                    .append($("<td>").append(city))
-                    .append($("<td>").append(state))
-                    .append($("<td>").append(country))
-                    .append($("<td>").append(startDate))
-                    .append($("<td>").append(startTime)));
-                }
-                else{
+                    $("#shows-container").append($("<tr>").addClass("show").attr("id", "table1").attr("show-link", goToURL)
+                        .append($("<td>").append(eventName))
+                        .append($("<td>").append(venueName))
+                        .append($("<td>").append(city))
+                        .append($("<td>").append(state))
+                        .append($("<td>").append(country))
+                        .append($("<td>").append(startDate))
+                        .append($("<td>").append(startTime)));
+                } else {
                     // var text = $("<p>").text(eventName + " " + venueName + " " + city + ", " + country);
-                    $("#shows-container").append($("<tr>").addClass("show").attr("show-link", goToURL)
-                    .append($("<td>").append(eventName))
-                    .append($("<td>").append(venueName))
-                    .append($("<td>").append(city))
-                    .append($("<td>").append(country))
-                    .append($("<td>").append(startDate))
-                    .append($("<td>").append(startTime)));
+                    $("#shows-container").append($("<tr>").addClass("show").attr("id", "table1").attr("show-link", goToURL)
+                        .append($("<td>").append(eventName))
+                        .append($("<td>").append(venueName))
+                        .append($("<td>").append(city))
+                        .append($("<td>").append(country))
+                        .append($("<td>").append(startDate))
+                        .append($("<td>").append(startTime)));
                 }
 
             }
         },
-        error(request, status, error){
+        error(request, status, error) {
             M.toast({
                 html: 'There was error. Try reloading the page!'
             })
         }
     })
-    $(document).on("click", ".show", function(){
+    $(document).on("click", ".show", function () {
         window.open($(this).attr("show-link"));
     })
 
-    $("#artist-btn").on("click", function(event){
-        if(localStorage.getItem("artistID") == null || localStorage.getItem("artistID") === ""){
+    $("#artist-btn").on("click", function (event) {
+        if (localStorage.getItem("artistID") == null || localStorage.getItem("artistID") === "") {
             event.preventDefault();
-            M.toast({html: 'Return to the home page to search for a location first!'})
+            M.toast({
+                html: 'Return to the home page to search for a location first!'
+            })
         }
     })
 
-    $("#location-btn").on("click", function(event){
-        if(localStorage.getItem("gps") == null){
+    $("#location-btn").on("click", function (event) {
+        if (localStorage.getItem("gps") == null) {
             event.preventDefault();
-            M.toast({html: 'Return to the home page to search for a location first!'})
+            M.toast({
+                html: 'Return to the home page to search for a location first!'
+            })
         }
     })
 
-    function formatDate(date){
+    function formatDate(date) {
         date = date.split("-");
         var str = "";
         str = date[1] + "/" + date[2] + "/" + date[0];
         return str;
     }
 
-    function formatTime(startTime){
+    function formatTime(startTime) {
         startTime = startTime.split(":");
         var str = "";
-        if(parseInt(startTime[0]) > 12){
+        if (parseInt(startTime[0]) > 12) {
             str = (parseInt(startTime[0]) - 12) + ":" + startTime[1] + " pm";
-        }
-        else if(parseInt(startTime[0]) == 12){
+        } else if (parseInt(startTime[0]) == 12) {
             str = startTime[0] + ":" + startTime[1] + " pm";
-        }
-        else if(parseInt(startTime[0]) == 24){
+        } else if (parseInt(startTime[0]) == 24) {
             str = startTime[0] + ":" + startTime[1] + " am";
-        }
-        else{
+        } else {
             str = startTime[0] + ":" + startTime[1] + " am";
         }
         return str;

@@ -162,7 +162,7 @@ $(document).ready(function () {
             //displays links for all the different results
             if (response._embedded.attractions.length > 1) {
                 var newRow = $("<div>").addClass("row").attr("id", "link-container");
-                var newCol = $("<form>").addClass("col s12");
+                var newCol = $("<form>").addClass("col s12 card orange darker-3").attr("id", "link-card");
                 var smallerRow = $("<div>").addClass("row");
 
                 newRow.append(newCol);

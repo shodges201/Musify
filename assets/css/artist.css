@@ -1,3 +1,17 @@
+body {
+    font-family: 'Audiowide';
+    font-size: 22px;
+}
+
+#footer1,
+#footer2 {
+    font-size: 16px;
+}
+
+#table1 {
+    font-size: 16px;
+}
+
 #shows {
     margin-top: 7px;
     padding: 15px;
@@ -9,6 +23,7 @@
 
 #links {
     margin-top: 0%;
+    font-size: 18px;
 }
 
 .social-media {

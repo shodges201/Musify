@@ -1,9 +1,89 @@
-#navBar {
-    height: 70px;
+/* UNUSED */
+
+/* input::-webkit-input-placeholder {
+    color: black !important;
+} */
+
+/* #card1,
+#card2,
+#card3
+{
+    position: relative;
+    bottom: 120px;
+} */
+
+/* #link-card1{
+    color: black;
+} */
+
+#musify-logo {
+    color: orange;
+    text-shadow: 4px 3px black;
+    font-size: 140px;
+}
+
+#musify-logo1 {
+    color: orange;
+    text-shadow: 4px 3px black;
+}
+
+#musify-logo2 {
+    color: orange;
+    text-shadow: 4px 3px black;
+}
+
+#link-card {
+    bottom: -30px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+body {
+    font-family: 'Audiowide';
+    font-size: 22px;
+}
+
+#footer1,
+#footer2 {
+    font-size: 16px;
+}
+
+#artistBtn {
+    left: 47%;
+    position: absolute;
+}
+
+#locationBtn {
+    left: 47%;
+    position: absolute;
+    bottom: -63px;
+}
+
+#venueBtn {
+    left: 47%;
+    position: absolute;
+    bottom: -63px;
+}
+
+#artistName {
+    left: 50%;
+    position: absolute;
+}
+
+#cardIMG1,
+#cardIMG2,
+#cardIMG3 {
+    height: 250px;
 }
 
 .parallax {
     position: static;
+    height: 40%;
+}
+
+.nameColor {
+    color: black;
 }
 
 nav ul a,
@@ -13,6 +93,14 @@ nav .brand-logo {
 
 p {
     line-height: 2rem;
+}
+
+#middleSection {
+    height: 450px;
+}
+
+#middleSection1 {
+    height: auto;
 }
 
 .sidenav-trigger {
@@ -25,6 +113,15 @@ p {
     height: auto;
     color: rgba(255, 255, 255, .9);
     width: 100%;
+}
+
+#index-banner {
+    height: 500px;
+    top: -20px;
+}
+
+#index-banner2 {
+    height: 500px;
 }
 
 .parallax-container .section {
@@ -131,10 +228,11 @@ nav a:hover {
     color: black;
 }
 
+/* To be continued */
 @media only screen and (max-width : 992px) {
     .parallax-container .section {
         position: absolute;
-        background-color: brown;
+        background-color: orange;
 
     }
 
@@ -145,7 +243,7 @@ nav a:hover {
 @media only screen and (max-width : 600px) {
     .parallax-container .section {
         position: absolute;
-        background-color: aqua;
+        background-color: orange;
 
     }
 }
