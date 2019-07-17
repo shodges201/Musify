@@ -125,7 +125,6 @@ $(document).ready(function () {
     }
 
     $("#artist-search").on("click", function () {
-        console.log("clicked");
         if (expanded && search === "artist") {
             $("#inputSection").remove();
             $("#buttonsSections").css("margin-bottom", "0px");
@@ -170,7 +169,6 @@ $(document).ready(function () {
                 $("#inputSection").append(newRow);
 
                 for (var i = 0; i < response._embedded.attractions.length; i++) {
-                    console.log("blaj");
                     var linkContainer = $("<div>").addClass("col s4");
                     var newLink = $("<a>").addClass("artistLink").attr("href", "assets/html/artist.html").text(response._embedded.attractions[i].name).attr("data-index", i);
                     linkContainer.append(newLink);
@@ -216,7 +214,6 @@ $(document).ready(function () {
         localStorage.setItem("artistTwitter", artistTwitter);
         localStorage.setItem("artistInstagram", artistInstagram);
         localStorage.setItem("artistItunes", artistItunes);
-        console.log(imageURL);
         localStorage.setItem("artistName", artist);
         localStorage.setItem("imageURL", imageURL);
         localStorage.setItem("artistID", artistID);
@@ -261,7 +258,6 @@ $(document).ready(function () {
         for (var i = 0; i < stateAbrev.length; i++) {
             var item = $("<option>").attr("value", i).text(stateAbrev[i]);
             trigger.append(item);
-            console.log(stateAbrev[i]);
         }
 
         inputRow.append(trigger);
@@ -395,7 +391,6 @@ $(document).ready(function () {
         for (var i = 0; i < stateAbrev.length; i++) {
             var item = $("<option>").attr("value", i).text(stateAbrev[i]);
             trigger.append(item);
-            console.log(stateAbrev[i]);
         }
 
         inputRow.append(trigger);
@@ -407,7 +402,6 @@ $(document).ready(function () {
         for (var i = 0; i < sortText.length; i++) {
             var item = $("<option>").attr("value", i).text(sortText[i]);
             sort.append(item);
-            console.log(stateAbrev[i]);
         }
 
         inputRow.append(sort);
@@ -419,7 +413,6 @@ $(document).ready(function () {
         for (var i = 0; i < radius.length; i++) {
             var item = $("<option>").attr("value", i).text(radius[i]);
             radiusSelect.append(item);
-            console.log(radius[i]);
         }
 
         inputRow.append(radiusSelect);
@@ -490,12 +483,10 @@ $(document).ready(function () {
         var lat = position.coords.latitude;
         var long = position.coords.longitude;
         var hash = GeoHasher.encode(lat, long, 8);
-        console.log(hash);
         logGPS(hash);
     }
 
     function error() {
-        console.log("failed");
         M.toast({
             html: 'Unable to locate position. Try turning on location services, and accepting the location prompt.'
         })
