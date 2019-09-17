@@ -1,6 +1,6 @@
 # Project1 
 
-The deployed project can be found here: https://shodges201.github.io/Project1/
+The deployed project can be found here: https://shodges201.github.io/Musify/
 
 TECHNICAL DOCUMENTATION FOR PROJECT MUSIFY
 
