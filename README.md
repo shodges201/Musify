@@ -2,7 +2,11 @@
 
 The deployed project can be found here: https://shodges201.github.io/Musify/
 
-TECHNICAL DOCUMENTATION FOR PROJECT MUSIFY
+## Preview
+
+![Preview Photo](assets/images/Musify.png)
+
+## TECHNICAL DOCUMENTATION FOR PROJECT MUSIFY
 
 <!-- Project-Overview --> PROJECT DESCRIPTION
  Musify will provide users with an interface to search for Artists, Venues, or Location in order to receive information about the search term. This is to create a platform where different search parameters are inputed with multiples search results on different pages.  
