@@ -4,7 +4,7 @@ The deployed project can be found here: https://shodges201.github.io/Musify/
 
 ## Preview
 
-![Preview Photo](assets/images/Musify.png)
+![Preview Photo](assets/Images/Musify.png)
 
 ## TECHNICAL DOCUMENTATION FOR PROJECT MUSIFY
 
