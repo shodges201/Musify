@@ -1,10 +1,13 @@
 # Project1 
+
+The deployed project can be found here: https://shodges201.github.io/Musify/
+
 TECHNICAL DOCUMENTATION FOR PROJECT MUSIFY
 
 <!-- Project-Overview --> PROJECT DESCRIPTION
  Musify will provide users with an interface to search for Artists, Venues, or Location in order to receive information about the search term. This is to create a platform where different search parameters are inputed with multiples search results on different pages.  
 
-<!-- Basic Layout --> DESIGN ANALYSIS (Front-End)
+<!-- Basic Layout --> DESIGN ANALYSIS
 The design adopted for Project Musify will make use of two main pages, the Home page and the Result page. The Hompage has three basic buttons where the users search parameters are inputed: ARTIST, LOCATION & VENUE. These inputs opens up a different page for the results of the search term. The Result page displays the various results inputed on the home page with the artist picture and name displayed at the top right corner, while the location and venue takes the center page. 
 
 <!-- Materialize Framework -->
@@ -64,9 +67,9 @@ Navigational Components: search field, slider, tags, icons.
 ```
 =================================================================================
 
-<!-- Programming Languages  --> (Back-End)
-Project Musify was executed with the following programming languages:
-JAVASCRIPT, JSON, AJAX, JQUERY. 
+<!-- Dynamic Content  -->
+Project Musify was created using:
+Javascript, jquery, AJAX, and the AJAX-returned JSON Data.
 
 JavaJavaScript (JS):
 
@@ -83,7 +86,7 @@ var questions = [{
 AJAX: 
 
 AJAX = Asynchronous JavaScript and XML. 
-Ajax is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send and retrieve data from a server asynchronously without interfering with the display and behavior of the existing page.
+Ajax is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send and retrieve data from a server asynchronously without interfering with the display and behavior of the existing page. Used to query the ticketmaster API to get the dynamic content, which is displayed on the different pages.
 
 ```$.ajax
 $.ajax({
