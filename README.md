@@ -1,4 +1,4 @@
-# Project1 
+# Musify 
 
 The deployed project can be found here: https://shodges201.github.io/Musify/
 
